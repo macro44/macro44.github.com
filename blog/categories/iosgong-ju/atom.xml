@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ios工具 | 谁在弹一曲东风破]]></title>
+  <link href="http://macro44.github.io/blog/categories/iosgong-ju/atom.xml" rel="self"/>
+  <link href="http://macro44.github.io/"/>
+  <updated>2015-12-02T17:42:29+08:00</updated>
+  <id>http://macro44.github.io/</id>
+  <author>
+    <name><![CDATA[Macro]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[iOS常用跳转设置]]></title>
+    <link href="http://macro44.github.io/blog/2015/12/02/ioschang-yong-tiao-zhuan-she-zhi/"/>
+    <updated>2015-12-02T14:50:56+08:00</updated>
+    <id>http://macro44.github.io/blog/2015/12/02/ioschang-yong-tiao-zhuan-she-zhi</id>
+    <content type="html"><![CDATA[<blockquote><p>经常会在应用中应用中遇到这样的问题，在app内部运行到某个场景的时候，需要打开系统的某项设置，但由于用户的不小心操作，或者当时的一些小想法而在系统弹框的时候选择了拒绝，之后就不能收到某项服务或者在app运行的环节中造成断片，这个时候我们就需要提醒用户手动去去打开系统设置，然后打开相应的服务，这给用户的体验是不好的，最好的用户体验是，如果用户拒绝了某项服务，但当他进入这个应用场景的时候，弹框提示用户的同时，还应该跳转到响应的系统设置页面，进行设置。</p></blockquote>
+
+<!--more-->
+
+
+<p></br></p>
+
+<h3>跳转本App设置界面以及相应的系统版本</h3>
+
+<p>需要请求一下位置权限或者通知权限，才可以跳进自己的app设置里面，如果没有任何权限请求，就只能跳到系统的设置界面<br/>
+<strong>iOS8及以上</strong></p>
+
+<pre><code>        NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if([[UIApplication sharedApplication] canOpenURL:url]) {
+            NSURL*url =[NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            [[UIApplication sharedApplication] openURL:url];
+        }
+</code></pre>
+
+<p><strong>iOS8以下</strong><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;打开应用的相册、推送、位置等等信息的时候会跳转到相应的页面</p>
+
+<p></br></p>
+
+<h3>跳转到系统设置</h3>
+
+<p><strong>通用模版</strong></p>
+
+<ol>
+<li><p>设置Url Schemes(Target > info > URL Type)<br/>
+     <img src="http://7xopon.com1.z0.glb.clouddn.com/8.png" alt="urlSchemes设置" /></p></li>
+<li><p>项目相应位置相应的代码<br/>
+＃define kCommonMacro  系统设置root</p>
+
+<pre><code>   NSURL *url = [NSURL URLWithString:@"kCommonMacro"];
+  if ([[UIApplication sharedApplication] canOpenURL:url]) {
+      [[UIApplication sharedApplication] openURL:url];
+   }
+
+  例子:
+  **WIFI**
+   NSURL *url = [NSURL URLWithString:@"prefs:root=WIFI"];
+  if ([[UIApplication sharedApplication] canOpenURL:url]) {
+      [[UIApplication sharedApplication] openURL:url];
+   }
+</code></pre></li>
+</ol>
+
+
+<p><strong>常用的系统设置prefs</strong></p>
+
+<ul>
+<li><p>Notification <pre/>prefs:root=NOTIFICATIONS_ID</p></li>
+<li><p>About <pre/>prefs:root=General&amp;path=About</p></li>
+<li><p>Accessibility <pre/>prefs:root=General&amp;path=ACCESSIBILITY</p></li>
+<li><p>AirplaneModeOn <pre/>prefs:root=AIRPLANE_MODE</p></li>
+<li><p>Auto-Lock <pre/>prefs:root=General&amp;path=AUTOLOCK</p></li>
+<li><p>Brightness <pre/>prefs:root=Brightness</p></li>
+<li><p>Bluetooth <pre/>prefs:root=General&amp;path=Bluetooth</p></li>
+<li><p>Date&amp; Time <pre/>prefs:root=General&amp;path=DATE_AND_TIME</p></li>
+<li><p>FaceTime <pre/>prefs:root=FACETIME</p></li>
+<li><p>General <pre/>prefs:root=General</p></li>
+<li><p>Keyboard <pre/>prefs:root=General&amp;path=Keyboard</p></li>
+<li><p>iCloud <pre/>prefs:root=CASTLE  iCloud</p></li>
+<li><p>Storage &amp; Backup <pre/>prefs:root=CASTLE&amp;path=STORAGE_AND_BACKUP</p></li>
+<li><p>International <pre/>prefs:root=General&amp;path=INTERNATIONAL</p></li>
+<li><p>Location Services <pre/>prefs:root=LOCATION_SERVICES</p></li>
+<li><p>Music <pre/>prefs:root=MUSIC</p></li>
+<li><p>Music Equalizer <pre/>prefs:root=MUSIC&amp;path=EQ</p></li>
+<li><p>Music VolumeLimit <pre/>prefs:root=MUSIC&amp;path=VolumeLimit</p></li>
+<li><p>Network <pre/>prefs:root=General&amp;path=Network</p></li>
+<li><p>Nike + iPod <pre/>prefs:root=NIKE_PLUS_IPOD</p></li>
+<li><p>Notes <pre/>prefs:root=NOTES</p></li>
+<li><p>Phone <pre/>prefs:root=Phone</p></li>
+<li><p>Photos <pre/>prefs:root=Photos</p></li>
+<li><p>Profile <pre/>prefs:root=General&amp;path=ManagedConfigurationList</p></li>
+<li><p>Reset <pre/>prefs:root=General&amp;path=Reset</p></li>
+<li><p>Safari <pre/>prefs:root=Safari</p></li>
+<li><p>Siri <pre/>prefs:root=General&amp;path=Assistant</p></li>
+<li><p>Sounds <pre/>prefs:root=Sounds</p></li>
+<li><p>SoftwareUpdate <pre/>prefs:root=General&amp;path=SOFTWARE_UPDATE_LINK</p></li>
+<li><p>Store <pre/>prefs:root=STORE</p></li>
+<li><p>Twitter <pre/>prefs:root=TWITTER</p></li>
+<li><p>Usage <pre/>prefs:root=General&amp;path=USAGE</p></li>
+<li><p>VPN <pre/>prefs:root=General&amp;path=Network/VPN</p></li>
+<li><p>Wallpaper <pre/>prefs:root=Wallpaper</p></li>
+<li><p>Wi-Fi <pre/>prefs:root=WIFI</p></li>
+<li><p>Setting  <pre/>prefs:root=INTERNET_TETHERING</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>
