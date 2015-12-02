@@ -4,7 +4,7 @@
   <title><![CDATA[谁在弹一曲东风破]]></title>
   <link href="http://macro44.github.io/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2015-12-02T16:35:36+08:00</updated>
+  <updated>2015-12-02T17:37:12+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -14,11 +14,145 @@
 
   
   <entry>
+    <title type="html"><![CDATA[iOS链式开发(1)]]></title>
+    <link href="http://macro44.github.io/blog/2015/12/02/ioslian-shi-kai-fa-1/"/>
+    <updated>2015-12-02T16:37:58+08:00</updated>
+    <id>http://macro44.github.io/blog/2015/12/02/ioslian-shi-kai-fa-1</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[iOS链式开发(一)]]></title>
     <link href="http://macro44.github.io/blog/2015/12/02/ioslian-shi-kai-fa-%5B%3F%5D/"/>
     <updated>2015-12-02T16:29:31+08:00</updated>
     <id>http://macro44.github.io/blog/2015/12/02/ioslian-shi-kai-fa-[?]</id>
-    <content type="html"><![CDATA[<blockquote><p>iOS高级编程</p></blockquote>
+    <content type="html"><![CDATA[<blockquote><p>烦不烦？当你需要调用一组动画的时候，需要一个个函数组件的去调用，其实你可以运用你之前学过的block，来实现如一系列的连贯触发行为；</p></blockquote>
+
+<h3>什么是链式开发</h3>
+
+<p>简单的说就是通过“.”操作符调用一系列的操作；</p>
+
+<!--more-->
+
+
+<h3>链式开发在OC中操作的原理</h3>
+
+<p>原理：结合类属性的getter属性可以通过.调用的特性，我们可以在每一个需要触发的链式环节，定义一个类属性，然后再类属性中返回类的实例，这样，就可以一系列的执行下去；</p>
+
+<p>如:假设有类ChainInvoking;以及属性<code>@property （nonatomic, copy）ChainInvoking* invoking;</code>
+则</p>
+
+<pre><code>－ （ChainInvoking* ）invoking{
+    /**
+        我们想做的事情;
+    **/
+    return self;
+}
+</code></pre>
+
+<p>那么此时，self.invoking与self在意义上其实是相等的，不过在self.invoking已经帮我们做了我们想做的事情，一次类推，如果我们有一系列的动作，那么<code>self.invoking1.invoking2...</code>也是可行的，这样就实现了我们的链式调用</p>
+
+<h3>为什么用block而不是直接用类属性</h3>
+
+<ol>
+<li>类属性不能传入参数，那么相应的一些功能的时候局限性更大</li>
+<li>在最后一个调用的时候，会报警告"Property access result unused-getter should not be used for side effects",意思大概就是获取的getter值，没有实际用途;<br/>
+<strong>综上</strong>,最好的办法是使用block 类属性，下面会给大家展示一个例子;</li>
+</ol>
+
+
+<h3>链式操作的实现</h3>
+
+<p>用一个例子说明： <br/>
+<strong>ChainedInvoking.h</strong></p>
+
+<pre><code>#import &lt;Foundation/Foundation.h&gt;
+@interface ChainedInvoking : NSObject
+
+@property (nonatomic, copy) ChainedInvoking* (^eat1)();
+@property (nonatomic, copy) ChainedInvoking* (^eat)(NSString* );
+@property (nonatomic, copy) ChainedInvoking* (^run)();
+@property (nonatomic, copy) ChainedInvoking* (^learn)();
+
+@property (nonatomic, copy) ChainedInvoking* play;
+@property (nonatomic, copy) ChainedInvoking* sing;
+@end
+</code></pre>
+
+<p><strong>ChainedInvoking.m</strong></p>
+
+<pre><code>#import "ChainedInvoking.h"
+
+@implementation ChainedInvoking
+
+- (ChainedInvoking* (^)())eat1{  
+   return ^{
+        NSLog(@"吃饭");
+        return self;
+  };
+}
+
+- (ChainedInvoking* (^)())learn{
+    return ^{
+     NSLog(@"学习");
+        return self;
+    };
+}   
+
+- (ChainedInvoking* (^)())run{
+    return ^{
+        NSLog(@"跑步");
+        return self;
+    };
+}
+
+- (ChainedInvoking* (^)(NSString* food))eat{
+    return ^(NSString* food){
+        NSLog(@"吃---%@",food);
+        return self;
+    };
+}
+
+- (ChainedInvoking*)play{
+    NSLog(@"玩耍!");
+    return self;
+}
+
+- (ChainedInvoking*)sing{
+    NSLog(@"唱歌!");
+    return self;
+}       
+
+@end
+</code></pre>
+
+<p><strong>调用:   </strong></p>
+
+<pre><code>ChainedInvoking* invoking = [[ChainedInvoking alloc] init];
+invoking.eat1().run().learn().eat(@"辣子鸡饭"); ①
+invoking.play.sing.eat(@"红烧牛肉面"); ②
+</code></pre>
+
+<p><strong>结果</strong><br/>
+①</p>
+
+<pre><code>吃饭
+跑步
+学习
+吃-－－辣子鸡饭
+</code></pre>
+
+<p>②</p>
+
+<pre><code>玩耍
+唱歌
+吃红烧牛肉面
+</code></pre>
+
+<h3>参考文档</h3>
+
+<p><a href="http://www.cocoachina.com/ios/20151123/14317.html">使用OC链式调用方式简化SpriteKit的动画调用</a></p>
 ]]></content>
   </entry>
   
