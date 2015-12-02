@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 其他 | 谁在弹一曲东风破]]></title>
   <link href="http://macro44.github.io/blog/categories/qi-ta/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2015-12-02T14:33:11+08:00</updated>
+  <updated>2015-12-02T14:39:29+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -19,6 +19,9 @@
     <updated>2015-12-02T14:05:11+08:00</updated>
     <id>http://macro44.github.io/blog/2015/12/02/markdownyu-fa-xue-xi</id>
     <content type="html"><![CDATA[<blockquote><p>基于一些巧合的原因接触了Octopress制作个人博客，在基本上搞定了所有基础框架的基础上，开始创建第一篇博客，但是发现，主体文章是基于Markdown的文档，之前基本上没有任何了解，搜集各种资料以及各个大神的博客，初步了解了一些基础语法，总结如下，希望能给以后的自己或你们提供力所能及的帮助;</p></blockquote>
+
+<!--more-->
+
 
 <h3>学习工具</h3>
 
@@ -95,9 +98,6 @@
 
 <p>本文Markdown源码：有兴趣的可以试着敲一遍!
 <img src="http://7xopon.com1.z0.glb.clouddn.com/7.png" alt="Demo范文" /></p>
-
-<!--more-->
-
 ]]></content>
   </entry>
   
