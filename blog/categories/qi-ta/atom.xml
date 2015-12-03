@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 其他 | 谁在弹一曲东风破]]></title>
   <link href="http://macro44.github.io/blog/categories/qi-ta/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2015-12-03T17:05:09+08:00</updated>
+  <updated>2015-12-03T18:14:00+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -12,6 +12,78 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress部分设置总结]]></title>
+    <link href="http://macro44.github.io/blog/2015/12/03/octopressbu-fen-she-zhi-zong-jie/"/>
+    <updated>2015-12-03T17:12:12+08:00</updated>
+    <id>http://macro44.github.io/blog/2015/12/03/octopressbu-fen-she-zhi-zong-jie</id>
+    <content type="html"><![CDATA[<blockquote><p>此文主要用来总结在设置Octopress时遇到的一些需求，但不好找的部分</p></blockquote>
+
+<!--more-->
+
+
+<p></br></p>
+
+<h3>在首页只显示部分文章内容</h3>
+
+<p><strong>修改原因:</strong>默认情况下，首页会显示每一篇文章的全部，这样给用户的感觉不是很好，首页应该只显示一个对文章的简单介绍，这样既方便了用户查看总体的文件介绍，找到感兴趣的，又不会给用户首页和文章详情是一样的感觉，引导用户点击进入查看全文</p>
+
+<p><strong>设置原理:</strong>在_config.yml里面设置了分隔符<font color=red size=3>excerpt_sepatator</font></p>
+
+<p><strong>设置方法:</strong>将_config.yml里面的<font color=red size=3>excerpt_link</font>字段对应的值中<em>”Continue reading“</em>部分引导用户点击查看全文的文字,并在相应的文章对应的Markdown文档中,找到恰当的地方，加入代码<code>&lt;!--more--&gt;</code></p>
+
+<p><strong>设置以及效果展示</strong>  <br/>
+<img src="http://7xopon.com1.z0.glb.clouddn.com/2015120302.png" alt="展示1" />
+<img src="http://7xopon.com1.z0.glb.clouddn.com/2015120301.png" alt="展示2" /></p>
+
+<p></br></p>
+
+<h3>设置字体、背景色</h3>
+
+<p><strong>修改原因:</strong>可能在撰写markdown文章的时候需要用到文本强调，但markdown常用的语法中并没有提供语法用于改变字体以及背景色</p>
+
+<p><strong>设置原理:</strong>markdown的兼容HMTML，可以用部分HTML来实现我们想要的效果</p>
+
+<p><strong>设置方法：</strong></p>
+
+<ol>
+<li><font color=red size=2>设置字体</font> 在需要改变属性的文本加上标签<code>&lt;font color=字体颜色 size=字体大小&gt;文本&lt;/font&gt;</code></li>
+<li><font color=red size=2>设置背景色</font> 在需要改变背景的文本加上标签<code>&lt;td bgcolor=背景颜色&gt;文本&lt;/td&gt;</code></li>
+</ol>
+
+
+<p><strong>设置Demo</strong></p>
+
+<pre><code>&lt;font color=red size=5&gt;Markdown&lt;/font&gt;
+</code></pre>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<font color=red size=5>Markdown</font></p>
+
+<pre><code>&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=#ff4500&gt;Markdown&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+或&lt;span style=background-color:#ff4500&gt;Markdown&lt;/span&gt; 
+</code></pre>
+
+<table><tr><td bgcolor=#ff4500><font color=white size=2>Markdown</font></td></tr></table>
+
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<span style=background-color:#ff4500><font color=white size=2>Markdown</font></span></p>
+
+<p></br></p>
+
+<h3>设置空格</h3>
+
+<p><strong>修改原因:</strong>默认的情况下markdown语法会顶格写，这样不符合一些写作习惯，且在markdown文档中无论敲多少空格，默认只显示一个文本间距，对其实现成难题</p>
+
+<p><strong>设置原理:</strong>markdown的兼容HMTML，可以用部分HTML来实现我们想要的效果</p>
+
+<p><strong>设置方法：</strong> 通过<code>&amp;nbsp;</code>来实现字符空格(注意每一个&amp;nbsp相当于一个字符,但中文为两个字符)</p>
+
+<p><strong>设置效果</strong><br/>
+<font color=red size=4>Mark&nbsp;&nbsp;Down</font><br/>
+<font color=red size=4>你&nbsp;&nbsp;&nbsp;&nbsp;好</font></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Markdown语法学习]]></title>
