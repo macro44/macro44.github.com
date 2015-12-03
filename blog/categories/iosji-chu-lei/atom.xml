@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ios基础类 | 谁在弹一曲东风破]]></title>
+  <link href="http://macro44.github.io/blog/categories/iosji-chu-lei/atom.xml" rel="self"/>
+  <link href="http://macro44.github.io/"/>
+  <updated>2015-12-03T17:05:09+08:00</updated>
+  <id>http://macro44.github.io/</id>
+  <author>
+    <name><![CDATA[Macro]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[UIBezierPath学习总结]]></title>
+    <link href="http://macro44.github.io/blog/2015/12/03/uibezierpathxue-xi-zong-jie/"/>
+    <updated>2015-12-03T17:00:10+08:00</updated>
+    <id>http://macro44.github.io/blog/2015/12/03/uibezierpathxue-xi-zong-jie</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+</feed>
