@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ios基础类 | 谁在弹一曲东风破]]></title>
   <link href="http://macro44.github.io/blog/categories/iosji-chu-lei/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2015-12-05T07:44:52+08:00</updated>
+  <updated>2015-12-05T07:52:30+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -98,7 +98,9 @@
                          startAngle:(CGFloat)startAngle
                            endAngle:(CGFloat)endAngle
                           clockwise:(BOOL)clockwise
-创建一段圆弧,center为圆弧的圆心，radius为半径,startAngle为开始弧度，endAngle为结束弧度,clockwise为方向    (默认YES为顺时针方向，No为逆时针方向)，具体的开始点与结束点看下方参考图 
+创建一段圆弧,center为圆弧的圆心，radius为半径,startAngle为开始弧度，endAngle为结束弧
+度,clockwise为方向  (默认YES为顺时针方向，No为逆时针方向)，具体的开始点与结束点看下方参
+考图  
 </code></pre>
 
 <p>其中正右顶点为起始点也为结束点,顺时针依次增加;  <br/>
@@ -138,8 +140,9 @@
           startAngle:(CGFloat)startAngle
             endAngle:(CGFloat)endAngle
            clockwise:(BOOL)clockwise
-增加一段圆弧，center为圆弧的圆心,radius为圆弧的半径,startAngle为起始圆弧度数,endAngle为终止圆弧度数,
-clockwise为是否是顺时钟，与（+ bezierPathWithArcCenter:radius:startAngle:endAngle:clockwise:）
+增加一段圆弧，center为圆弧的圆心,radius为圆弧的半径,startAngle为起始圆弧度数,endAngle
+为终止圆弧度数,clockwise为是否是顺时钟，与
+（+ bezierPathWithArcCenter:radius:startAngle:endAngle:clockwise:）
 的演示图中度数的起始点和终止点相同
 </code></pre>
 
@@ -251,7 +254,8 @@ typedef enum CGLineJoin CGLineCap;
 <pre><code>- (void)setLineDash:(const CGFloat *)pattern
           count:(NSInteger)count
           phase:(CGFloat)phase
-画一条虚线,其中pattern为一个C风格的数组，包含段点的长度，count为pattern的数量，phase为间隔的宽度
+画一条虚线,其中pattern为一个C风格的数组，包含段点的长度，count为pattern的数量，phase为
+间隔的宽度
 
 例子:    
 UIBezierPath *path = [UIBezierPath bezierPath];
