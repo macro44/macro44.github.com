@@ -66,7 +66,9 @@ categories: iOS基础类
                              startAngle:(CGFloat)startAngle
                                endAngle:(CGFloat)endAngle
                               clockwise:(BOOL)clockwise
-	创建一段圆弧,center为圆弧的圆心，radius为半径,startAngle为开始弧度，endAngle为结束弧度,clockwise为方向	(默认YES为顺时针方向，No为逆时针方向)，具体的开始点与结束点看下方参考图	
+	创建一段圆弧,center为圆弧的圆心，radius为半径,startAngle为开始弧度，endAngle为结束弧
+	度,clockwise为方向	(默认YES为顺时针方向，No为逆时针方向)，具体的开始点与结束点看下方参
+	考图	
 其中正右顶点为起始点也为结束点,顺时针依次增加;	
 ![参考图](http://7xopon.com1.z0.glb.clouddn.com/2015120401.png)  
 <font color=red size=3>[注意]:</font>之所以强调顺时针方向与逆时针防线的原因是，当起始弧度与结束弧度相同的时候，不同的方向画线会得到不同的结果，如0和π/2，顺时针会得到右下部的1/4部分，但逆时针会得到上面的3/4部分;
@@ -99,8 +101,9 @@ categories: iOS基础类
               startAngle:(CGFloat)startAngle
                 endAngle:(CGFloat)endAngle
                clockwise:(BOOL)clockwise
-	增加一段圆弧，center为圆弧的圆心,radius为圆弧的半径,startAngle为起始圆弧度数,endAngle为终止圆弧度数,
-	clockwise为是否是顺时钟，与（+ bezierPathWithArcCenter:radius:startAngle:endAngle:clockwise:）
+	增加一段圆弧，center为圆弧的圆心,radius为圆弧的半径,startAngle为起始圆弧度数,endAngle
+	为终止圆弧度数,clockwise为是否是顺时钟，与
+	（+ bezierPathWithArcCenter:radius:startAngle:endAngle:clockwise:）
 	的演示图中度数的起始点和终止点相同
 	
 ####2.4. - addQuadCurveToPoint:controlPoint:
@@ -197,7 +200,8 @@ categories: iOS基础类
 	- (void)setLineDash:(const CGFloat *)pattern
               count:(NSInteger)count
               phase:(CGFloat)phase
-    画一条虚线,其中pattern为一个C风格的数组，包含段点的长度，count为pattern的数量，phase为间隔的宽度
+    画一条虚线,其中pattern为一个C风格的数组，包含段点的长度，count为pattern的数量，phase为
+    间隔的宽度
 	
 	例子:    
 	UIBezierPath *path = [UIBezierPath bezierPath];
