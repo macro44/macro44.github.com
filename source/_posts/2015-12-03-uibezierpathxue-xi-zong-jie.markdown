@@ -217,13 +217,52 @@ categories: iOS基础类
 
 ![演示图5](http://7xopon.com1.z0.glb.clouddn.com/2015120406.png)
 
-###3.6 - getLineDash:count:phase:
+####3.6 - getLineDash:count:phase:
 	
 	- (void)getLineDash:(CGFloat *)pattern
               count:(NSInteger *)count
               phase:(CGFloat *)phase
-	获取虚线中的某一段
+	获取虚线中的属性，pattern为C风格的数组，包含段点的信息,count包含pattern的数量，phase为
+	间隔的宽度，必须要确保pattern数组足够大，当不知道pattern的长度的时候，可以调用两次该方法，
+	第一次pattern传NULL，然后根据返回的count值创建数组，再次调用；
 
+####3.7. - containsPoint:
+
+	- (BOOL)containsPoint:(CGPoint)point
+	判断点是否在某个封闭区域内，必须是封闭区域，可以调用－ closePath；
+	
+<font color=blue>［相关的函数］:</font>   
+- closePath:    
+usesEvenOldFillRule <font color=gray size=2>*Property*</font>
+
+
+###4. 绘图
+####4.1. - fillWithBlendMode:alpha:
+
+	- (void)fillWithBlendMode:(CGBlendMode)blendMode alpha:(CGFloat)alpha
+	填充一个path，blendMode，渲染模式；alpha，透明度
+	
+####4.2. - strokeWithBlendMode:alpha:
+
+	- (void)strokeWithBlendMode:(CGBlendMode)blendMode
+                      alpha:(CGFloat)alpha
+	以某种方式渲染边界线,blendMode，渲染模式；alpha，透明度
+	
+####4.3. -fill
+
+	- (void)fill
+	填充某个路径
+	
+####4.4 - stroke
+	
+	- (void)stroke
+	绘制路径
+	
+###5.动画
+####5.1 - applyTransform:
+
+	- (void)applyTransform:(CGAffineTransform)transform
+	对路径实现变换，transform变换
 	
 	
 
