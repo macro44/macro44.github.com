@@ -57,7 +57,6 @@ View.m
  NSObject + AAA.h
  
 		#import <Foundation/Foundation.h>  
-		
 		@interface NSObject (AAA)  
 		
 		@property (nonatomic,copy) NSString *aaa;  
