@@ -52,13 +52,13 @@ View.m
 三、@dynamic的使用 
 
 1. 用于NSManagedObject中，告诉编译器不要处理属性的getter和setter方法，由CoreData框架来生成getter和setter方法
-2. 用于分类中,具体使用需要结合到runtime，让分类可以存在属性变量
- 例子如下：  
- NSObject + AAA.h  
- 
-		#import <Foundation/Foundation.h> 
-		@interface NSObject (AAA)
+2. 用于分类中,具体使用需要结合到runtime，让分类可以存在属性变量  
+例子如下：  
+NSObject + AAA.h
+
+		#import <Foundation/Foundation.h>
 		
+		@interface NSObject (AAA)
 		@property (nonatomic,copy) NSString *aaa;
 		
 		@end
