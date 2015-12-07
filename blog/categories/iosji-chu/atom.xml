@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ios基础 | 谁在弹一曲东风破]]></title>
   <link href="http://macro44.github.io/blog/categories/iosji-chu/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2015-12-07T21:08:03+08:00</updated>
+  <updated>2015-12-07T21:12:23+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -76,9 +76,9 @@ View.h</p>
 NSObject + AAA.h</p>
 
 <pre><code>   #import &lt;Foundation/Foundation.h&gt; 
-   @interface NSObject (AAA)  
+   @interface NSObject (AAA)
 
-   @property (nonatomic,copy) NSString *aaa;  
+   @property (nonatomic,copy) NSString *aaa;
 
    @end
 </code></pre></li>
