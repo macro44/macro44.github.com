@@ -56,7 +56,8 @@ View.m
  例子如下：  
  NSObject + AAA.h
  
-		#import <Foundation/Foundation.h>  
+ 
+		#import <Foundation/Foundation.h> 
 		@interface NSObject (AAA)  
 		
 		@property (nonatomic,copy) NSString *aaa;  
