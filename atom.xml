@@ -4,7 +4,7 @@
   <title><![CDATA[谁在弹一曲东风破]]></title>
   <link href="http://macro44.github.io/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2015-12-07T21:12:23+08:00</updated>
+  <updated>2015-12-07T21:18:17+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -71,16 +71,16 @@ View.h</p>
 
 <ol>
 <li>用于NSManagedObject中，告诉编译器不要处理属性的getter和setter方法，由CoreData框架来生成getter和setter方法</li>
-<li><p>用于分类中,具体使用需要结合到runtime，让分类可以存在属性变量
+<li><p>用于分类中,具体使用需要结合到runtime，让分类可以存在属性变量<br/>
 例子如下：<br/>
 NSObject + AAA.h</p>
 
-<pre><code>   #import &lt;Foundation/Foundation.h&gt; 
-   @interface NSObject (AAA)
+<pre><code>  #import &lt;Foundation/Foundation.h&gt;
 
-   @property (nonatomic,copy) NSString *aaa;
+  @interface NSObject (AAA)
+  @property (nonatomic,copy) NSString *aaa;
 
-   @end
+  @end
 </code></pre></li>
 </ol>
 
