@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://macro44.github.io/blog/2015/12/07/oczhong-de-at-dynamic/</loc>
+    <lastmod>2015-12-07T16:58:12+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://macro44.github.io/blog/2015/12/03/octopressbu-fen-she-zhi-zong-jie/</loc>
     <lastmod>2015-12-03T17:12:12+08:00</lastmod>
   </url>
@@ -46,5 +50,8 @@
   </url>
   <url>
     <loc>http://macro44.github.io/blog/categories/iosji-chu-lei/</loc>
+  </url>
+  <url>
+    <loc>http://macro44.github.io/blog/categories/iosji-chu/</loc>
   </url>
 </urlset>

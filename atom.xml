@@ -4,7 +4,7 @@
   <title><![CDATA[谁在弹一曲东风破]]></title>
   <link href="http://macro44.github.io/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2015-12-05T16:34:10+08:00</updated>
+  <updated>2015-12-07T17:45:25+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -12,6 +12,103 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[OC中的@dynamic]]></title>
+    <link href="http://macro44.github.io/blog/2015/12/07/oczhong-de-at-dynamic/"/>
+    <updated>2015-12-07T16:58:12+08:00</updated>
+    <id>http://macro44.github.io/blog/2015/12/07/oczhong-de-at-dynamic</id>
+    <content type="html"><![CDATA[<blockquote><p>在分析一份代码的时候，遇到了@dynamic，以前也遇到过，但是没有系统的总结一下，刚好有空，系统总结一下，为以后的使用做好准备；</p></blockquote>
+
+<p>一、@dynamic与@synthesize的区别</p>
+
+<ol>
+<li>@property有两个对应的词，一个是@synthesize,另一个是@dynamic,当两个都没写的时候，系统会默认为写了@property的属性添加@synthesize var=_var;</li>
+<li>@synthesize的语义为如果你没有重写getter或setter方法，系统会自动帮忙生成getter和setter方法，@dynamic的语义为getter和setter方法由用户自己实现，不自动生成；</li>
+</ol>
+
+
+<!--more-->
+
+
+<p>二、@dynamic的读取<br/>
+View.h</p>
+
+<pre><code>#import &lt;UIKit/UIKit.h&gt;
+
+@interface View : UIView
+{
+    NSString * _name;
+}
+
+@property (nonatomic,copy) NSString *name;
+
+@end
+</code></pre>
+
+<p>View.m</p>
+
+<pre><code>#import "View.h"
+
+@implementation View
+
+@dynamic name;
+
+- (void)setName:(NSString *)name{
+   _name = name;
+}
+
+- (NSString*)name{
+   return _name;
+}
+
+@end
+</code></pre>
+
+<p>如果没有写setter和getter两个方法，调用的时候，[[View alloc] init].name会报错，但是将@dynamic换成@synthesize的话没有getter和setter也不会有问题；</p>
+
+<p>三、@dynamic的使用</p>
+
+<ol>
+<li>用于NSManagedObject中，告诉编译器不要处理属性的getter和setter方法，由CoreData框架来生成getter和setter方法</li>
+<li><p>用于分类中,具体使用需要结合到runtime，让分类可以存在属性变量
+例子如下：<br/>
+NSObject + AAA.h</p>
+
+<pre><code>   #import &lt;Foundation/Foundation.h&gt;
+
+   @interface NSObject (AAA)
+
+   @property (nonatomic,copy) NSString *aaa;
+
+   @end
+</code></pre></li>
+</ol>
+
+
+<p>NSObjct + AAA.m</p>
+
+<pre><code>    #import "NSObject+AAA.h"
+    #import &lt;objc/runtime.h&gt;
+
+    static const void *kAAAIdentifier = (void*)@"kAAAIdentifier";
+
+    @implementation NSObject (AAA)
+
+    @dynamic aaa;
+
+    - (void)setAaa:(NSString *)aaa{
+            objc_setAssociatedObject(self, kAAAIdentifier, aaa, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+
+    - (NSString*)aaa{
+        return  objc_getAssociatedObject(self, kAAAIdentifier);
+    }
+
+    @end
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Octopress部分设置总结]]></title>
