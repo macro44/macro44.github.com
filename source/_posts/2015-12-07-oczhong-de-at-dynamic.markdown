@@ -3,7 +3,7 @@ layout: post
 title: "OC中的@dynamic"
 date: 2015-12-07 16:58:12 +0800
 comments: true
-categories: iOS基础
+categories: iOS
 ---
 
 > 在分析一份代码的时候，遇到了@dynamic，以前也遇到过，但是没有系统的总结一下，刚好有空，系统总结一下，为以后的使用做好准备；

@@ -3,7 +3,7 @@ layout: post
 title: "Markdown语法学习"
 date: 2015-12-02 14:05:11 +0800
 comments: true
-categories: 其他
+categories: Markdown
 ---
 > 基于一些巧合的原因接触了Octopress制作个人博客，在基本上搞定了所有基础框架的基础上，开始创建第一篇博客，但是发现，主体文章是基于Markdown的文档，之前基本上没有任何了解，搜集各种资料以及各个大神的博客，初步了解了一些基础语法，总结如下，希望能给以后的自己或你们提供力所能及的帮助;
 

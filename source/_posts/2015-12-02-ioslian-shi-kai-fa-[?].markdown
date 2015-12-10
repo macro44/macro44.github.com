@@ -3,7 +3,7 @@ layout: post
 title: "iOS链式开发(一)"
 date: 2015-12-02 16:29:31 +0800
 comments: true
-categories: iOS高级开发
+categories: iOS
 ---
 
 > 烦不烦？当你需要调用一组动画的时候，需要一个个函数组件的去调用，其实你可以运用你之前学过的block，来实现如一系列的连贯触发行为；

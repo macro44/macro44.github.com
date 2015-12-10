@@ -3,7 +3,7 @@ layout: post
 title: "Octopress部分设置总结"
 date: 2015-12-03 17:12:12 +0800
 comments: true
-categories: 其他
+categories: Octopress
 ---
  > 此文主要用来总结在设置Octopress时遇到的一些需求，但不好找的部分
  
