@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: 其他 | 谁在弹一曲东风破]]></title>
-  <link href="http://macro44.github.io/blog/categories/qi-ta/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Octopress | 谁在弹一曲东风破]]></title>
+  <link href="http://macro44.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2015-12-09T18:30:27+08:00</updated>
+  <updated>2015-12-11T10:56:37+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -82,94 +82,6 @@
 <p><strong>设置效果</strong><br/>
 <font color=red size=4>Mark&nbsp;&nbsp;Down</font><br/>
 <font color=red size=4>你&nbsp;&nbsp;&nbsp;&nbsp;好</font></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Markdown语法学习]]></title>
-    <link href="http://macro44.github.io/blog/2015/12/02/markdownyu-fa-xue-xi/"/>
-    <updated>2015-12-02T14:05:11+08:00</updated>
-    <id>http://macro44.github.io/blog/2015/12/02/markdownyu-fa-xue-xi</id>
-    <content type="html"><![CDATA[<blockquote><p>基于一些巧合的原因接触了Octopress制作个人博客，在基本上搞定了所有基础框架的基础上，开始创建第一篇博客，但是发现，主体文章是基于Markdown的文档，之前基本上没有任何了解，搜集各种资料以及各个大神的博客，初步了解了一些基础语法，总结如下，希望能给以后的自己或你们提供力所能及的帮助;</p></blockquote>
-
-<!--more-->
-
-
-<h3>学习工具</h3>
-
-<p>推荐使用Mou,<a href="http://25.io/mou/">下载地址</a></p>
-
-<h3>学习历程:</h3>
-
-<ul>
-<li>了解最基本的语法</li>
-<li>尝试把所有的语法运用到一个简单的Demo中</li>
-</ul>
-
-
-<h3>基本语法</h3>
-
-<p>大致分为4个部分：文本、列表、样式、图片链接</p>
-
-<h4>文本</h4>
-
-<ul>
-<li>文字粗体 语法为: <strong>变粗的文本</strong></li>
-<li>文本斜体 语法为: <em>斜体部分</em></li>
-<li>下标     语法为: someText[^flag] [^flag]:des<br/>
-<strong>需要特别注意</strong> 下标语法中标记与解释不能放在一行中完成     <br/>
-<img src="http://7xopon.com1.z0.glb.clouddn.com/3.png" alt="图片效果" /></li>
-</ul>
-
-
-<h4>列表</h4>
-
-<ul>
-<li>有序列表  语法: 阿拉伯数字+.  如1.</li>
-<li>无序列表  语法: -或*+需要序列化的字符串,如基本语法样式</li>
-<li>列表＋代码  语法: 首先换行，删掉头部的自动添加的列表符号，然后连续两个Tab或者8个空格 <br/>
-<strong>需要特别注意</strong> 无论是有序还是无序，系统只会保持一种风格，且符号与文本之间必须隔着一个空格
- <img src="http://7xopon.com1.z0.glb.clouddn.com/5.png" alt="图片效果" /></li>
-</ul>
-
-
-<h4>样式</h4>
-
-<ul>
-<li>一级标题 语法为: #Markdown</li>
-<li>二级标题 语法为: ##Markdown</li>
-<li>三级标题 语法为: ###Markdown</li>
-<li>引导语   语法为:> + 空格 +文本 如> 你好</li>
-<li>段落分隔线 语法为: &mdash; 或者  ***</li>
-<li>简单文字代码框   语法为: <code>代码段</code></li>
-<li>段落代码框      语法为:Tab/4个空格+代码段（需要注意Tab前面不能存在含有意义的*,如果存在可用分割线来分隔)</li>
-<li><p>表格     语法为:</p>
-
-<pre><code>| 列名        | 列名          | 列名  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-</code></pre>
-
-<p><strong>需要特别注意</strong>本区块的代码必须要独立一行书写，且引导语标志必须➕空格
-<img src="http://7xopon.com1.z0.glb.clouddn.com/6.png" alt="图片效果" /></p></li>
-</ul>
-
-
-<h4>图片与链接</h4>
-
-<ul>
-<li>   链接    语法为: <a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">链接名</a> 如<a href="www.baidu.com">百度</a></li>
-<li>   图片    语法为<img src="%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5" alt="图片名" />
-如<img src="http://7xopon.com1.z0.glb.clouddn.com/1.jpg" alt="Mou icon" /></li>
-</ul>
-
-
-<h3>Demo范文</h3>
-
-<p>本文Markdown源码：有兴趣的可以试着敲一遍!
-<img src="http://7xopon.com1.z0.glb.clouddn.com/7.png" alt="Demo范文" /></p>
 ]]></content>
   </entry>
   

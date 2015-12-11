@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[谁在弹一曲东风破]]></title>
-  <link href="http://macro44.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Ios | 谁在弹一曲东风破]]></title>
+  <link href="http://macro44.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
   <updated>2015-12-11T10:56:37+08:00</updated>
   <id>http://macro44.github.io/</id>
@@ -274,78 +274,6 @@ NSObject + AAA.h</p>
 
     @end
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Octopress部分设置总结]]></title>
-    <link href="http://macro44.github.io/blog/2015/12/03/octopressbu-fen-she-zhi-zong-jie/"/>
-    <updated>2015-12-03T17:12:12+08:00</updated>
-    <id>http://macro44.github.io/blog/2015/12/03/octopressbu-fen-she-zhi-zong-jie</id>
-    <content type="html"><![CDATA[<blockquote><p>此文主要用来总结在设置Octopress时遇到的一些需求，但不好找的部分</p></blockquote>
-
-<!--more-->
-
-
-<p></br></p>
-
-<h3>在首页只显示部分文章内容</h3>
-
-<p><strong>修改原因:</strong>默认情况下，首页会显示每一篇文章的全部，这样给用户的感觉不是很好，首页应该只显示一个对文章的简单介绍，这样既方便了用户查看总体的文件介绍，找到感兴趣的，又不会给用户首页和文章详情是一样的感觉，引导用户点击进入查看全文</p>
-
-<p><strong>设置原理:</strong>在_config.yml里面设置了分隔符<font color=red size=3>excerpt_sepatator</font></p>
-
-<p><strong>设置方法:</strong>将_config.yml里面的<font color=red size=3>excerpt_link</font>字段对应的值中<em>”Continue reading“</em>部分引导用户点击查看全文的文字,并在相应的文章对应的Markdown文档中,找到恰当的地方，加入代码<code>&lt;!--more--&gt;</code></p>
-
-<p><strong>设置以及效果展示</strong>  <br/>
-<img src="http://7xopon.com1.z0.glb.clouddn.com/2015120302.png" alt="展示1" />
-<img src="http://7xopon.com1.z0.glb.clouddn.com/2015120301.png" alt="展示2" /></p>
-
-<p></br></p>
-
-<h3>设置字体、背景色</h3>
-
-<p><strong>修改原因:</strong>可能在撰写markdown文章的时候需要用到文本强调，但markdown常用的语法中并没有提供语法用于改变字体以及背景色</p>
-
-<p><strong>设置原理:</strong>markdown的兼容HMTML，可以用部分HTML来实现我们想要的效果</p>
-
-<p><strong>设置方法：</strong></p>
-
-<ol>
-<li><font color=red size=2>设置字体</font> 在需要改变属性的文本加上标签<code>&lt;font color=字体颜色 size=字体大小&gt;文本&lt;/font&gt;</code></li>
-<li><font color=red size=2>设置背景色</font> 在需要改变背景的文本加上标签<code>&lt;td bgcolor=背景颜色&gt;文本&lt;/td&gt;</code></li>
-</ol>
-
-
-<p><strong>设置Demo</strong></p>
-
-<pre><code>&lt;font color=red size=5&gt;Markdown&lt;/font&gt;
-</code></pre>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<font color=red size=5>Markdown</font></p>
-
-<pre><code>&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=#ff4500&gt;Markdown&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-或&lt;span style=background-color:#ff4500&gt;Markdown&lt;/span&gt; 
-</code></pre>
-
-<table><tr><td bgcolor=#ff4500><font color=white size=2>Markdown</font></td></tr></table>
-
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;<span style=background-color:#ff4500><font color=white size=2>Markdown</font></span></p>
-
-<p></br></p>
-
-<h3>设置空格</h3>
-
-<p><strong>修改原因:</strong>默认的情况下markdown语法会顶格写，这样不符合一些写作习惯，且在markdown文档中无论敲多少空格，默认只显示一个文本间距，对其实现成难题</p>
-
-<p><strong>设置原理:</strong>markdown的兼容HMTML，可以用部分HTML来实现我们想要的效果</p>
-
-<p><strong>设置方法：</strong> 通过<code>&amp;nbsp;</code>来实现字符空格(注意每一个&amp;nbsp相当于一个字符,但中文为两个字符)</p>
-
-<p><strong>设置效果</strong><br/>
-<font color=red size=4>Mark&nbsp;&nbsp;Down</font><br/>
-<font color=red size=4>你&nbsp;&nbsp;&nbsp;&nbsp;好</font></p>
 ]]></content>
   </entry>
   
@@ -894,94 +822,6 @@ invoking.play.sing.eat(@"红烧牛肉面"); ②
 <li><p>Setting  <pre/>prefs:root=INTERNET_TETHERING</p></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Markdown语法学习]]></title>
-    <link href="http://macro44.github.io/blog/2015/12/02/markdownyu-fa-xue-xi/"/>
-    <updated>2015-12-02T14:05:11+08:00</updated>
-    <id>http://macro44.github.io/blog/2015/12/02/markdownyu-fa-xue-xi</id>
-    <content type="html"><![CDATA[<blockquote><p>基于一些巧合的原因接触了Octopress制作个人博客，在基本上搞定了所有基础框架的基础上，开始创建第一篇博客，但是发现，主体文章是基于Markdown的文档，之前基本上没有任何了解，搜集各种资料以及各个大神的博客，初步了解了一些基础语法，总结如下，希望能给以后的自己或你们提供力所能及的帮助;</p></blockquote>
-
-<!--more-->
-
-
-<h3>学习工具</h3>
-
-<p>推荐使用Mou,<a href="http://25.io/mou/">下载地址</a></p>
-
-<h3>学习历程:</h3>
-
-<ul>
-<li>了解最基本的语法</li>
-<li>尝试把所有的语法运用到一个简单的Demo中</li>
-</ul>
-
-
-<h3>基本语法</h3>
-
-<p>大致分为4个部分：文本、列表、样式、图片链接</p>
-
-<h4>文本</h4>
-
-<ul>
-<li>文字粗体 语法为: <strong>变粗的文本</strong></li>
-<li>文本斜体 语法为: <em>斜体部分</em></li>
-<li>下标     语法为: someText[^flag] [^flag]:des<br/>
-<strong>需要特别注意</strong> 下标语法中标记与解释不能放在一行中完成     <br/>
-<img src="http://7xopon.com1.z0.glb.clouddn.com/3.png" alt="图片效果" /></li>
-</ul>
-
-
-<h4>列表</h4>
-
-<ul>
-<li>有序列表  语法: 阿拉伯数字+.  如1.</li>
-<li>无序列表  语法: -或*+需要序列化的字符串,如基本语法样式</li>
-<li>列表＋代码  语法: 首先换行，删掉头部的自动添加的列表符号，然后连续两个Tab或者8个空格 <br/>
-<strong>需要特别注意</strong> 无论是有序还是无序，系统只会保持一种风格，且符号与文本之间必须隔着一个空格
- <img src="http://7xopon.com1.z0.glb.clouddn.com/5.png" alt="图片效果" /></li>
-</ul>
-
-
-<h4>样式</h4>
-
-<ul>
-<li>一级标题 语法为: #Markdown</li>
-<li>二级标题 语法为: ##Markdown</li>
-<li>三级标题 语法为: ###Markdown</li>
-<li>引导语   语法为:> + 空格 +文本 如> 你好</li>
-<li>段落分隔线 语法为: &mdash; 或者  ***</li>
-<li>简单文字代码框   语法为: <code>代码段</code></li>
-<li>段落代码框      语法为:Tab/4个空格+代码段（需要注意Tab前面不能存在含有意义的*,如果存在可用分割线来分隔)</li>
-<li><p>表格     语法为:</p>
-
-<pre><code>| 列名        | 列名          | 列名  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-</code></pre>
-
-<p><strong>需要特别注意</strong>本区块的代码必须要独立一行书写，且引导语标志必须➕空格
-<img src="http://7xopon.com1.z0.glb.clouddn.com/6.png" alt="图片效果" /></p></li>
-</ul>
-
-
-<h4>图片与链接</h4>
-
-<ul>
-<li>   链接    语法为: <a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">链接名</a> 如<a href="www.baidu.com">百度</a></li>
-<li>   图片    语法为<img src="%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5" alt="图片名" />
-如<img src="http://7xopon.com1.z0.glb.clouddn.com/1.jpg" alt="Mou icon" /></li>
-</ul>
-
-
-<h3>Demo范文</h3>
-
-<p>本文Markdown源码：有兴趣的可以试着敲一遍!
-<img src="http://7xopon.com1.z0.glb.clouddn.com/7.png" alt="Demo范文" /></p>
 ]]></content>
   </entry>
   
