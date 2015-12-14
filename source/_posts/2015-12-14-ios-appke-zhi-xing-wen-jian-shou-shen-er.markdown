@@ -21,7 +21,7 @@ Strip Linked Product / Deployment Postprocessing / Symbols Hidden by Default 在
 	这些选项目前都是XCode里release的默认选项，但旧版XCode生成的项目可能不是，可以检查一下。其他优化还可以参考官方文档—[CodeFootprint.pdf](https://developer.apple.com/legacy/library/documentation/Performance/Conceptual/CodeFootprint/CodeFootprint.pdf)
 	
 ###第三方库统计
-通过（一）中对可执行文件的分析可以知道第三方库的占比，从而判断是否值得去找可执行方案去替换掉这个第三方库，转载作者写了一个node.js脚本，可以通过linkmap去统计每个.o目标文件占用的体积和每个.a静态库占用的体积.具体在[详见这里](https://gist.github.com/bang590/8f3e9704f1c2661836cd)
+通过<a href="/blog/2015/12/14/ios-appke-zhi-xing-wen-jian-shou-shen-%5B%3F%5D/">(一)</a>中对可执行文件的分析可以知道第三方库的占比，从而判断是否值得去找可执行方案去替换掉这个第三方库，转载作者写了一个node.js脚本，可以通过linkmap去统计每个.o目标文件占用的体积和每个.a静态库占用的体积.具体在[详见这里](https://gist.github.com/bang590/8f3e9704f1c2661836cd)
 
 ###ARC ->MRC
 具体没看懂，知道结论是可减少资源包的8%左右，有兴趣的可查看[原文](http://blog.cnbang.net/tech/2544/),但是这样程序的维护成本就上升了，如果没有特殊情况，一般不建议使用.
