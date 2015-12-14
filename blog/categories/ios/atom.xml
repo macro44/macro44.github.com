@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ios | 谁在弹一曲东风破]]></title>
   <link href="http://macro44.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2015-12-14T18:35:46+08:00</updated>
+  <updated>2015-12-14T18:40:57+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -43,7 +43,7 @@ Strip Linked Product / Deployment Postprocessing / Symbols Hidden by Default 在
 
 <h3>第三方库统计</h3>
 
-<p>通过（一）中对可执行文件的分析可以知道第三方库的占比，从而判断是否值得去找可执行方案去替换掉这个第三方库，转载作者写了一个node.js脚本，可以通过linkmap去统计每个.o目标文件占用的体积和每个.a静态库占用的体积.具体在<a href="https://gist.github.com/bang590/8f3e9704f1c2661836cd">详见这里</a></p>
+<p>通过<a href="http://macro44.github.io/blog/2015/12/14/ios-appke-zhi-xing-wen-jian-shou-shen-%5B%3F%5D/">(一)</a>中对可执行文件的分析可以知道第三方库的占比，从而判断是否值得去找可执行方案去替换掉这个第三方库，转载作者写了一个node.js脚本，可以通过linkmap去统计每个.o目标文件占用的体积和每个.a静态库占用的体积.具体在<a href="https://gist.github.com/bang590/8f3e9704f1c2661836cd">详见这里</a></p>
 
 <h3>ARC ->MRC</h3>
 
