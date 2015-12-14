@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ios | 谁在弹一曲东风破]]></title>
   <link href="http://macro44.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2015-12-11T12:20:04+08:00</updated>
+  <updated>2015-12-14T17:17:48+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -12,6 +12,50 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[iOS App可执行文件瘦身(一)]]></title>
+    <link href="http://macro44.github.io/blog/2015/12/14/ios-appke-zhi-xing-wen-jian-shou-shen-%5B%3F%5D/"/>
+    <updated>2015-12-14T16:17:28+08:00</updated>
+    <id>http://macro44.github.io/blog/2015/12/14/ios-appke-zhi-xing-wen-jian-shou-shen-[?]</id>
+    <content type="html"><![CDATA[<div class="text" style="text-align:center;"><font size=4 color=red>iOS App可执行文件的组成</font></div>
+
+
+<blockquote><p>面试的时候遇到的面试题，如何给App瘦身，之前有看过类似的题目，讲的大概就是两个方面，一、给资源文件瘦身，2、能下载处理的尽量通过后续下载来处理。但没有实际操作过。所以总感觉回答的不是那么个味道。回来问同事以及查资料后果然，需要两个方面来瘦身：1、减少资源包的大小；2、减少可执行文件的大小。1在本博客后续博客中会提到如何瘦身，本文主要讲解可执行文件瘦身的一部分，App可执行文件的组成；</p></blockquote>
+
+<!--more-->
+
+
+<p><a href="http://blog.cnbang.net/tech/2296/">转载From</a></p>
+
+<h3>查看App可执行文件组成的方法</h3>
+
+<ol>
+<li><p>XCode开启编译选项Write Link Map File
+Xcode -> Project -> Build Setting ->搜索map ->设置Write Link Map File为Yes<br/>
+<img src="http://7xopon.com1.z0.glb.clouddn.com/2015121401.png" alt="展示图片" /></p></li>
+<li><p>编译后，通过路径查找找到图中txt文件对应的文件
+具体路径: ~/Library/Developer/Xcode/DerivedData/XXX-xxxxxxxxxxxx/Build/Intermediates/XXX.build/Debug-iphoneos/XXX.build/XXX-LinkMap-xxx.txt<br/>
+（这个LinkMap展示了整个App中可执行文件的全貌，列出了编译后的每一个.o文件，包括.a文件里的，以及每一个目标文件的代码段，数据段存储详情等）</p></li>
+<li><p>以我目前手上的项目为例，在linkMap中的文件列表，有部分删减，为了方便讲解
+<img src="http://7xopon.com1.z0.glb.clouddn.com/2015121402.png" alt="展示图片" /></p>
+
+<p>  第一部分(Object files部分)含义：<br/>
+  前面中括号表示文件的编号，在后面的部分中会用到,后面表示可执行文件的位置</p>
+
+<p>  第二部分(Sections部分)含义:<br/>
+  Address表示偏移位置,Size表示大小,Segment表示段类型(<code>__TEXT</code>,保存程序代码段编译后的机器码，<code>__Data</code>),Section表示段名称(<code>__text</code>表示编译后的程序可执行语句，<code>__data</code>表示已初始化的全局变量和局部静态变量，<code>__bss</code>表示未初始化的全局变量和局部静态变量,<code>__csstring</code>表示代码里的字符串常量)</p>
+
+<p>  可以发现每一行的数据都是紧跟在上一行数据后面， 即第二行到Address为第一行的Address加上第二行的Size组成</p>
+
+<p>  第三部分(symbols部分)含义:
+  Address 表示偏移位置,第二部分表示占用大小,第三部分表示所属文件序号，对应上述Object files列表，最后是文件名称</p></li>
+<li><p>使用<br/>
+ 在了解了可执行文件的组成后，我们可以通过计算来获取某个静态库在项目中的占比，通过将.a静态库的.o加起来，就是这个静态库可执行部分占整个app空间的大小。（但是需要注意，此大小并不等于静态库的物理大小，此大小只是可执行文件的大小，要小于静态库的物理大小）</p></li>
+</ol>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Runloop的常见使用]]></title>
@@ -724,104 +768,6 @@ invoking.play.sing.eat(@"红烧牛肉面"); ②
 <h3>参考文档</h3>
 
 <p><a href="http://www.cocoachina.com/ios/20151123/14317.html">使用OC链式调用方式简化SpriteKit的动画调用</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS常用跳转设置]]></title>
-    <link href="http://macro44.github.io/blog/2015/12/02/ioschang-yong-tiao-zhuan-she-zhi/"/>
-    <updated>2015-12-02T14:50:56+08:00</updated>
-    <id>http://macro44.github.io/blog/2015/12/02/ioschang-yong-tiao-zhuan-she-zhi</id>
-    <content type="html"><![CDATA[<blockquote><p>经常会在应用中应用中遇到这样的问题，在app内部运行到某个场景的时候，需要打开系统的某项设置，但由于用户的不小心操作，或者当时的一些小想法而在系统弹框的时候选择了拒绝，之后就不能收到某项服务或者在app运行的环节中造成断片，这个时候我们就需要提醒用户手动去去打开系统设置，然后打开相应的服务，这给用户的体验是不好的，最好的用户体验是，如果用户拒绝了某项服务，但当他进入这个应用场景的时候，弹框提示用户的同时，还应该跳转到响应的系统设置页面，进行设置。</p></blockquote>
-
-<!--more-->
-
-
-<p></br></p>
-
-<h3>跳转本App设置界面以及相应的系统版本</h3>
-
-<p>需要请求一下位置权限或者通知权限，才可以跳进自己的app设置里面，如果没有任何权限请求，就只能跳到系统的设置界面<br/>
-<strong>iOS8及以上</strong></p>
-
-<pre><code>        NSURL * url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-        if([[UIApplication sharedApplication] canOpenURL:url]) {
-            NSURL*url =[NSURL URLWithString:UIApplicationOpenSettingsURLString];
-            [[UIApplication sharedApplication] openURL:url];
-        }
-</code></pre>
-
-<p><strong>iOS8以下</strong><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;打开应用的相册、推送、位置等等信息的时候会跳转到相应的页面</p>
-
-<p></br></p>
-
-<h3>跳转到系统设置</h3>
-
-<p><strong>通用模版</strong></p>
-
-<ol>
-<li><p>设置Url Schemes(Target > info > URL Type)<br/>
-     <img src="http://7xopon.com1.z0.glb.clouddn.com/8.png" alt="urlSchemes设置" /></p></li>
-<li><p>项目相应位置相应的代码<br/>
-＃define kCommonMacro  系统设置root</p>
-
-<pre><code>   NSURL *url = [NSURL URLWithString:@"kCommonMacro"];
-  if ([[UIApplication sharedApplication] canOpenURL:url]) {
-      [[UIApplication sharedApplication] openURL:url];
-   }
-
-  例子:
-  **WIFI**
-   NSURL *url = [NSURL URLWithString:@"prefs:root=WIFI"];
-  if ([[UIApplication sharedApplication] canOpenURL:url]) {
-      [[UIApplication sharedApplication] openURL:url];
-   }
-</code></pre></li>
-</ol>
-
-
-<p><strong>常用的系统设置prefs</strong></p>
-
-<ul>
-<li><p>Notification <pre/>prefs:root=NOTIFICATIONS_ID</p></li>
-<li><p>About <pre/>prefs:root=General&amp;path=About</p></li>
-<li><p>Accessibility <pre/>prefs:root=General&amp;path=ACCESSIBILITY</p></li>
-<li><p>AirplaneModeOn <pre/>prefs:root=AIRPLANE_MODE</p></li>
-<li><p>Auto-Lock <pre/>prefs:root=General&amp;path=AUTOLOCK</p></li>
-<li><p>Brightness <pre/>prefs:root=Brightness</p></li>
-<li><p>Bluetooth <pre/>prefs:root=General&amp;path=Bluetooth</p></li>
-<li><p>Date&amp; Time <pre/>prefs:root=General&amp;path=DATE_AND_TIME</p></li>
-<li><p>FaceTime <pre/>prefs:root=FACETIME</p></li>
-<li><p>General <pre/>prefs:root=General</p></li>
-<li><p>Keyboard <pre/>prefs:root=General&amp;path=Keyboard</p></li>
-<li><p>iCloud <pre/>prefs:root=CASTLE  iCloud</p></li>
-<li><p>Storage &amp; Backup <pre/>prefs:root=CASTLE&amp;path=STORAGE_AND_BACKUP</p></li>
-<li><p>International <pre/>prefs:root=General&amp;path=INTERNATIONAL</p></li>
-<li><p>Location Services <pre/>prefs:root=LOCATION_SERVICES</p></li>
-<li><p>Music <pre/>prefs:root=MUSIC</p></li>
-<li><p>Music Equalizer <pre/>prefs:root=MUSIC&amp;path=EQ</p></li>
-<li><p>Music VolumeLimit <pre/>prefs:root=MUSIC&amp;path=VolumeLimit</p></li>
-<li><p>Network <pre/>prefs:root=General&amp;path=Network</p></li>
-<li><p>Nike + iPod <pre/>prefs:root=NIKE_PLUS_IPOD</p></li>
-<li><p>Notes <pre/>prefs:root=NOTES</p></li>
-<li><p>Phone <pre/>prefs:root=Phone</p></li>
-<li><p>Photos <pre/>prefs:root=Photos</p></li>
-<li><p>Profile <pre/>prefs:root=General&amp;path=ManagedConfigurationList</p></li>
-<li><p>Reset <pre/>prefs:root=General&amp;path=Reset</p></li>
-<li><p>Safari <pre/>prefs:root=Safari</p></li>
-<li><p>Siri <pre/>prefs:root=General&amp;path=Assistant</p></li>
-<li><p>Sounds <pre/>prefs:root=Sounds</p></li>
-<li><p>SoftwareUpdate <pre/>prefs:root=General&amp;path=SOFTWARE_UPDATE_LINK</p></li>
-<li><p>Store <pre/>prefs:root=STORE</p></li>
-<li><p>Twitter <pre/>prefs:root=TWITTER</p></li>
-<li><p>Usage <pre/>prefs:root=General&amp;path=USAGE</p></li>
-<li><p>VPN <pre/>prefs:root=General&amp;path=Network/VPN</p></li>
-<li><p>Wallpaper <pre/>prefs:root=Wallpaper</p></li>
-<li><p>Wi-Fi <pre/>prefs:root=WIFI</p></li>
-<li><p>Setting  <pre/>prefs:root=INTERNET_TETHERING</p></li>
-</ul>
-
 ]]></content>
   </entry>
   
