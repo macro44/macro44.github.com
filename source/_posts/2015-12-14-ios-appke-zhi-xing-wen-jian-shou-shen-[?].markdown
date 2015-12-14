@@ -5,13 +5,13 @@ date: 2015-12-14 16:17:28 +0800
 comments: true
 categories: iOS
 ---
-<div class="text" style="text-align:center;"><font size=4 color=red>iOS App可执行文件的组成</font></div>
+<div class="text" style="text-align:center;"><font size=6 color=red>iOS App可执行文件的组成</font></div>
 
 > 面试的时候遇到的面试题，如何给App瘦身，之前有看过类似的题目，讲的大概就是两个方面，一、给资源文件瘦身，2、能下载处理的尽量通过后续下载来处理。但没有实际操作过。所以总感觉回答的不是那么个味道。回来问同事以及查资料后果然，需要两个方面来瘦身：1、减少资源包的大小；2、减少可执行文件的大小。1在本博客后续博客中会提到如何瘦身，本文主要讲解可执行文件瘦身的一部分，App可执行文件的组成；
 
 <!--more-->
 
-[转载From](http://blog.cnbang.net/tech/2296/)
+[转载于bang's blog ](http://blog.cnbang.net/tech/2296/)
 
 ###查看App可执行文件组成的方法
 1. XCode开启编译选项Write Link Map File
