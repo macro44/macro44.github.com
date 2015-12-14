@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ios | 谁在弹一曲东风破]]></title>
   <link href="http://macro44.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2015-12-14T17:17:48+08:00</updated>
+  <updated>2015-12-14T18:35:46+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -14,11 +14,69 @@
 
   
   <entry>
+    <title type="html"><![CDATA[iOS App可执行文件瘦身(二)]]></title>
+    <link href="http://macro44.github.io/blog/2015/12/14/ios-appke-zhi-xing-wen-jian-shou-shen-er/"/>
+    <updated>2015-12-14T18:11:05+08:00</updated>
+    <id>http://macro44.github.io/blog/2015/12/14/ios-appke-zhi-xing-wen-jian-shou-shen-er</id>
+    <content type="html"><![CDATA[<div class="text" style="text-align:center;"><font size=6 color=red>iOS可执行文件瘦身方法</font></div>
+
+
+<blockquote><p>在第一部分中，我们已经介绍了如何获取可执行文件组成列表，以及如何查看静态链接库的占比的方法。这一部分我们将来仔细介绍可执行文件瘦身的具体方法；</p></blockquote>
+
+<p><a href="http://blog.cnbang.net/tech/2544/">转载于bang&rsquo;s blog</a>
+</br></p>
+
+<!--more-->
+
+
+<h3>编译选项</h3>
+
+<ol>
+<li>编译器优化级别
+Build Settings->Optimization Level有几个编译优化选项，release版应该选择Fastest, Smalllest，这个选项会开启那些不增加代码大小的全部优化，并让可执行文件尽可能小。</li>
+<li><p>去除符号信息
+Strip Linked Product / Deployment Postprocessing / Symbols Hidden by Default 在release版本应该设为yes，可以去除不必要的调试符号。Symbols Hidden by Default会把所有符号都定义成”private extern”，详细信息见<a href="https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/MachOTopics/1-Articles/executing_files.html#//apple_ref/doc/uid/TP40001829-97021-TPXREF121">官方文档</a>。</p>
+
+<p>  这些选项目前都是XCode里release的默认选项，但旧版XCode生成的项目可能不是，可以检查一下。其他优化还可以参考官方文档—<a href="https://developer.apple.com/legacy/library/documentation/Performance/Conceptual/CodeFootprint/CodeFootprint.pdf">CodeFootprint.pdf</a></p></li>
+</ol>
+
+
+<h3>第三方库统计</h3>
+
+<p>通过（一）中对可执行文件的分析可以知道第三方库的占比，从而判断是否值得去找可执行方案去替换掉这个第三方库，转载作者写了一个node.js脚本，可以通过linkmap去统计每个.o目标文件占用的体积和每个.a静态库占用的体积.具体在<a href="https://gist.github.com/bang590/8f3e9704f1c2661836cd">详见这里</a></p>
+
+<h3>ARC ->MRC</h3>
+
+<p>具体没看懂，知道结论是可减少资源包的8%左右，有兴趣的可查看<a href="http://blog.cnbang.net/tech/2544/">原文</a>,但是这样程序的维护成本就上升了，如果没有特殊情况，一般不建议使用.</p>
+
+<h3>无用代码</h3>
+
+<p>在项目里新建一个类，给它添加几个方法，但不要在任何地方import它，build完项目后观察linkmap，你会发现这个类还是被编译进可执行文件了。
+按C++的经验，没有被使用到的类和方法编译器都会优化掉，不会编进最终的可执行文件，但object-c不一样，因为object-c的动态特性，它可以通过类和方法名反射获得这个类和方法进行调用，所以就算在代码里某个类没被使用到，编译器也没法保证这个类不会在运行时通过反射去调用，所以只要是在项目里的文件，无论是否又被使用到都会被编译进可执行文件。
+对此我们可以通过脚本，遍历整个项目的文件，找出所有没有被引用的类文件和没有被调用的方法，在保证没有其他地方动态调用的情况下把它们去掉。如果整个项目历时很长，历时代码遗留较多，这个清理对可执行文件省出的空间还是挺可观的。</p>
+
+<h3>类/方法名的长度</h3>
+
+<p>观察linkmap可以发现每个类和方法名都在__cstring段里都存了相应的字符串值，所以类和方法名的长短也是对可执行文件大小是有影响的，原因还是object-c的动态特性，因为需要通过类/方法名反射找到这个类/方法进行调用，object-c对象模型会把类/方法名字符串都保存下来。
+对此我们可以考虑在编译前把所有类和方法名进行混淆，跟压缩js一样，把长名字替换成短名字，这样做的好处除了缩小体积外，还对安全性有很大提升，别人拿到可执行文件对它class-dump出来的结果都是混淆后的类和方法名，就无法从类和方法名中猜出某个方法是做什么的，就难以挂钩子进行hack。不过这样做有个缺点，就是crash堆栈反解出来的堆栈方法名会是混淆后的，需要再加一层混淆->原名的转换，实现和使用成本有点高。
+实际上这部分占用的长度比较小，中型项目也就几百K，对安全性要求高的情况可以试试。</p>
+
+<h3>冗余字符串</h3>
+
+<p>代码上定义的所有静态字符串都会记录在在可执行文件的__cstring段，如果项目里Log非常多，这个空间占用也是可观的，也有几百K的大小，可以考虑清理所有冗余的字符串。另外如果有特别长的字符串，建议抽离保存成静态文件，因为AppStore对可执行文件加密导致压缩率低，特别长的字符串抽离成静态资源文件后压缩率会比在可执行文件里高很多。</p>
+
+<h3>列一个清单</h3>
+
+<p><img src="http://7xopon.com1.z0.glb.clouddn.com/2015121403.png" alt="效果展示" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[iOS App可执行文件瘦身(一)]]></title>
     <link href="http://macro44.github.io/blog/2015/12/14/ios-appke-zhi-xing-wen-jian-shou-shen-%5B%3F%5D/"/>
     <updated>2015-12-14T16:17:28+08:00</updated>
     <id>http://macro44.github.io/blog/2015/12/14/ios-appke-zhi-xing-wen-jian-shou-shen-[?]</id>
-    <content type="html"><![CDATA[<div class="text" style="text-align:center;"><font size=4 color=red>iOS App可执行文件的组成</font></div>
+    <content type="html"><![CDATA[<div class="text" style="text-align:center;"><font size=6 color=red>iOS App可执行文件的组成</font></div>
 
 
 <blockquote><p>面试的时候遇到的面试题，如何给App瘦身，之前有看过类似的题目，讲的大概就是两个方面，一、给资源文件瘦身，2、能下载处理的尽量通过后续下载来处理。但没有实际操作过。所以总感觉回答的不是那么个味道。回来问同事以及查资料后果然，需要两个方面来瘦身：1、减少资源包的大小；2、减少可执行文件的大小。1在本博客后续博客中会提到如何瘦身，本文主要讲解可执行文件瘦身的一部分，App可执行文件的组成；</p></blockquote>
@@ -26,7 +84,7 @@
 <!--more-->
 
 
-<p><a href="http://blog.cnbang.net/tech/2296/">转载From</a></p>
+<p><a href="http://blog.cnbang.net/tech/2296/">转载于bang&rsquo;s blog </a></p>
 
 <h3>查看App可执行文件组成的方法</h3>
 
@@ -634,140 +692,6 @@ usesEvenOldFillRule <font color=gray size=2><em>Property</em></font></p>
 <pre><code>- (void)applyTransform:(CGAffineTransform)transform
 对路径实现变换，transform变换
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS链式开发(一)]]></title>
-    <link href="http://macro44.github.io/blog/2015/12/02/ioslian-shi-kai-fa-%5B%3F%5D/"/>
-    <updated>2015-12-02T16:29:31+08:00</updated>
-    <id>http://macro44.github.io/blog/2015/12/02/ioslian-shi-kai-fa-[?]</id>
-    <content type="html"><![CDATA[<blockquote><p>烦不烦？当你需要调用一组动画的时候，需要一个个函数组件的去调用，其实你可以运用你之前学过的block，来实现如一系列的连贯触发行为；</p></blockquote>
-
-<h3>什么是链式开发</h3>
-
-<p>简单的说就是通过“.”操作符调用一系列的操作；</p>
-
-<!--more-->
-
-
-<h3>链式开发在OC中操作的原理</h3>
-
-<p>原理：结合类属性的getter属性可以通过.调用的特性，我们可以在每一个需要触发的链式环节，定义一个类属性，然后再类属性中返回类的实例，这样，就可以一系列的执行下去；</p>
-
-<p>如:假设有类ChainInvoking;以及属性<code>@property （nonatomic, copy）ChainInvoking* invoking;</code>
-则</p>
-
-<pre><code>－ （ChainInvoking* ）invoking{
-    /**
-        我们想做的事情;
-    **/
-    return self;
-}
-</code></pre>
-
-<p>那么此时，self.invoking与self在意义上其实是相等的，不过在self.invoking已经帮我们做了我们想做的事情，一次类推，如果我们有一系列的动作，那么<code>self.invoking1.invoking2...</code>也是可行的，这样就实现了我们的链式调用</p>
-
-<h3>为什么用block而不是直接用类属性</h3>
-
-<ol>
-<li>类属性不能传入参数，那么相应的一些功能的时候局限性更大</li>
-<li>在最后一个调用的时候，会报警告"Property access result unused-getter should not be used for side effects",意思大概就是获取的getter值，没有实际用途;<br/>
-<strong>综上</strong>,最好的办法是使用block 类属性，下面会给大家展示一个例子;</li>
-</ol>
-
-
-<h3>链式操作的实现</h3>
-
-<p>用一个例子说明： <br/>
-<strong>ChainedInvoking.h</strong></p>
-
-<pre><code>#import &lt;Foundation/Foundation.h&gt;
-@interface ChainedInvoking : NSObject
-
-@property (nonatomic, copy) ChainedInvoking* (^eat1)();
-@property (nonatomic, copy) ChainedInvoking* (^eat)(NSString* );
-@property (nonatomic, copy) ChainedInvoking* (^run)();
-@property (nonatomic, copy) ChainedInvoking* (^learn)();
-
-@property (nonatomic, copy) ChainedInvoking* play;
-@property (nonatomic, copy) ChainedInvoking* sing;
-@end
-</code></pre>
-
-<p><strong>ChainedInvoking.m</strong></p>
-
-<pre><code>#import "ChainedInvoking.h"
-
-@implementation ChainedInvoking
-
-- (ChainedInvoking* (^)())eat1{  
-   return ^{
-        NSLog(@"吃饭");
-        return self;
-  };
-}
-
-- (ChainedInvoking* (^)())learn{
-    return ^{
-     NSLog(@"学习");
-        return self;
-    };
-}   
-
-- (ChainedInvoking* (^)())run{
-    return ^{
-        NSLog(@"跑步");
-        return self;
-    };
-}
-
-- (ChainedInvoking* (^)(NSString* food))eat{
-    return ^(NSString* food){
-        NSLog(@"吃---%@",food);
-        return self;
-    };
-}
-
-- (ChainedInvoking*)play{
-    NSLog(@"玩耍!");
-    return self;
-}
-
-- (ChainedInvoking*)sing{
-    NSLog(@"唱歌!");
-    return self;
-}       
-
-@end
-</code></pre>
-
-<p><strong>调用:   </strong></p>
-
-<pre><code>ChainedInvoking* invoking = [[ChainedInvoking alloc] init];
-invoking.eat1().run().learn().eat(@"辣子鸡饭"); ①
-invoking.play.sing.eat(@"红烧牛肉面"); ②
-</code></pre>
-
-<p><strong>结果</strong><br/>
-①</p>
-
-<pre><code>吃饭
-跑步
-学习
-吃-－－辣子鸡饭
-</code></pre>
-
-<p>②</p>
-
-<pre><code>玩耍
-唱歌
-吃红烧牛肉面
-</code></pre>
-
-<h3>参考文档</h3>
-
-<p><a href="http://www.cocoachina.com/ios/20151123/14317.html">使用OC链式调用方式简化SpriteKit的动画调用</a></p>
 ]]></content>
   </entry>
   
