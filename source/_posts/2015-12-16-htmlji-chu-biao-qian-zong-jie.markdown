@@ -232,5 +232,5 @@ categories: HTML
 	< &lt; &#60;
 	> $gt; &#62;
 	© &#169;
-	
-[Runoob教程链接](http://www.runoob.com/html/html-tutorial.html)
+
+<a href="http://www.runoob.com/html/html-tutorial.html" style="text-decoration:none;" target="_blank">Runoob教程链接</a>
