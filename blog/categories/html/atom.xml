@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Html | 谁在弹一曲东风破]]></title>
+  <link href="http://macro44.github.io/blog/categories/html/atom.xml" rel="self"/>
+  <link href="http://macro44.github.io/"/>
+  <updated>2015-12-16T17:35:51+08:00</updated>
+  <id>http://macro44.github.io/</id>
+  <author>
+    <name><![CDATA[Macro]]></name>
+    <email><![CDATA[macro_zj@163.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[HTML基础标签总结]]></title>
+    <link href="http://macro44.github.io/blog/2015/12/16/htmlji-chu-biao-qian-zong-jie/"/>
+    <updated>2015-12-16T10:31:14+08:00</updated>
+    <id>http://macro44.github.io/blog/2015/12/16/htmlji-chu-biao-qian-zong-jie</id>
+    <content type="html"><![CDATA[<blockquote><p>离不开H5，就尽情的享受HTML带来的方便。学H5，从基本的HTML开始；</p></blockquote>
+
+<h3>目录:</h3>
+
+<p><a href=#1>1. HTML基本文档</a><br/>
+<a href=#2>2. HTML基本标签</a><br/>
+<a href=#3>3. HTML文本格式化</a><br/>
+<a href=#4>4. 链接</a><br/>
+<a href=#5>5. 样式/区块</a><br/>
+<a href=#6>6. 表格</a><br/>
+<a href=#7>7. 列表</a><br/>
+<a href=#8>8. 框架</a><br/>
+<a href=#9>9. 表单</a><br/>
+<a href=#10>10. 实体</a><br/></p>
+
+<!--more-->
+
+
+<p><a id=1>1. HTML基本文档</a></p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;title&gt;文档标题&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+文本...
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p><a id=2>2. HTML基本标签</a><br/></p>
+
+<pre><code>&lt;h1&gt;这是一级标题&lt;/h1&gt;
+&lt;h2&gt;这是二级标题&lt;/h2&gt;
+&lt;h3&gt;这是三级标题&lt;/h3&gt;
+...
+&lt;h6&gt;这是最小的标题&lt;/h6&gt;
+&lt;p&gt;这是一个段落&lt;/p&gt;
+&lt;br/&gt;  换行
+&lt;hr/&gt;  水平线
+&lt;!--这是注释--&gt;
+</code></pre>
+
+<p><a id=3>3. HTML文本格式化</a><br/></p>
+
+<pre><code>&lt;b&gt;粗体文本&lt;/b&gt;
+&lt;i&gt;斜体文本&lt;/i&gt;
+&lt;strong&gt;加重语气－粗体显示&lt;/strong&gt;
+&lt;em&gt;着重语气-斜体显示&lt;/em&gt;
+&lt;small&gt;更小的文本&lt;/small&gt;
+&lt;sub&gt;定义下标字&lt;/sub&gt;
+&lt;sup&gt;定义上标字&lt;/sup&gt;
+&lt;ins&gt;定义删除字&lt;/ins&gt;
+&lt;del&gt;定义下划线&lt;del&gt;
+
+&lt;code&gt;计算机代码&lt;/code&gt;
+&lt;kbd&gt;键盘输入&lt;/kbd&gt;
+&lt;samp&gt;计算机代码样本&lt;/samp&gt;
+&lt;var&gt;定义变量&lt;/var&gt;
+&lt;pre&gt;预格式文本&lt;/pre&gt;
+
+&lt;abbr&gt;定义缩写&lt;/abbr&gt;
+&lt;address&gt;定义地址&lt;/address&gt;
+&lt;bdo&gt;定义文本的方向&lt;/bdo&gt;
+&lt;q&gt;短引用&lt;/q&gt;
+&lt;blockquote&gt;从另一个源引用的部分&lt;/blockquote&gt;
+&lt;cite&gt;一般与blockquote连用，用来表示引用的源&lt;/cite&gt;
+</code></pre>
+
+<p><a id=4>4. 链接</a><br/></p>
+
+<pre><code>普通的链接: &lt;a href="url"&gt;链接文本&lt;/a&gt;
+图片: &lt;img src="url" alt="替换文本" height="高" width="宽"&gt;
+图片链接: &lt;a href="url"&gt;&lt;img src="url" alt="替换文本"&gt;&lt;/a&gt;
+邮件链接:    &lt;a href="mailto:mail_xxx@example.com"&gt;发送Email&lt;/a&gt;
+书签: &lt;a id="tips"&gt;提示部分&lt;/a&gt;
+    &lt;a href="#tips"&gt;跳转到提示部分&lt;/a&gt;
+</code></pre>
+
+<p><a id=5>5. 样式/区块</a><br/></p>
+
+<pre><code>样式写法(一):
+&lt;style type="text/css"&gt;
+body {background-color:yellow;}
+h1 {color:red;text-align:center;}
+p  {color:green;}
+&lt;/style&gt;    
+
+样式写法(二):
+&lt;body style="background-color:red;text-align:center;"&gt;...&lt;/body&gt;
+
+样式写法(三):
+&lt;link rel="当前文档与被链接文档之间的关系" type="text/css" href="url"&gt;
+
+区块:主要功能是将页面模块分化，每一个模块有每一个模块的样式，方便进行处理
+&lt;div&gt;块级元素&lt;/div&gt;
+
+&lt;span&gt;内联元素&lt;/span&gt;
+</code></pre>
+
+<p><a id=6>6. 表格</a><br/></p>
+
+<pre><code>&lt;table border="边宽"&gt;&lt;/table&gt;
+&lt;caption&gt;表的标题&lt;/caption&gt;
+&lt;tr&gt;定义一行&lt;/tr&gt;
+&lt;th&gt;表头&lt;/th&gt;
+&lt;td&gt;元素&lt;/td&gt;
+colspan表示可跨越的列数
+rowspan表示可跨越的行数
+cellspacing 表示表格与表格边缘的距离
+
+例子：
+&lt;table border="1" style="text-align:center" cellspacing="0"&gt;
+&lt;caption&gt;表格Demo&lt;/caption&gt;
+&lt;tr&gt;
+    &lt;th&gt;A&lt;/th&gt;
+    &lt;th&gt;B&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td colspan="2"&gt;a&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+
+<table border="1" style="text-align:center" cellspacing="0">
+<caption>表格Demo</caption>
+<tr>
+    <th>A</th>
+    <th>B</th>
+</tr>
+<tr>
+    <td colspan="2">a</td>
+</tr>
+</table>
+
+
+<p><a id=7>7. 列表</a><br/></p>
+
+<pre><code>&lt;ol&gt;定义有序列表&lt;/ol&gt;
+&lt;ul&gt;定义无序列表&lt;/ul&gt;
+&lt;dl&gt;定义自定义列表&lt;/dl&gt;
+&lt;dt&gt;自定义列表项目&lt;/dt&gt;
+&lt;dd&gt;自定义列表的描述&lt;/dd&gt;
+type 表示列表的类型
+
+有序列表
+&lt;ol type="1" start="50"&gt;
+    &lt;li&gt;第一项&lt;/li&gt;
+    &lt;li&gt;第二项&lt;/li&gt;
+    &lt;li&gt;第三项&lt;/li&gt;
+&lt;/ol&gt;
+
+无序列表
+&lt;ul&gt;
+    &lt;li&gt;第一项&lt;/li&gt;
+    &lt;li&gt;第二项&lt;/li&gt;
+&lt;/ul&gt;
+
+自定义列表 
+&lt;dl&gt;
+    &lt;dt&gt;项目名1&lt;/dt&gt;
+        &lt;dd&gt;项目名描述1&lt;/dd&gt;
+    &lt;dt&gt;项目名2&lt;/dt&gt;
+        &lt;dd&gt;项目描述2&lt;/dd&gt;
+&lt;/dl&gt;
+</code></pre>
+
+<ol type="a" start="3">
+        <li>第一项</li>
+        <li>第二项</li>
+        <li>第三项</li>
+    </ol>
+
+
+<p><a id=8>8. 框架</a><br/></p>
+
+<pre><code>&lt;iframe src="url" width="宽" height="高" name="名称"&gt;定义框架&lt;/iframe&gt;
+</code></pre>
+
+<p><a id=9>9. 表单</a><br/></p>
+
+<pre><code>&lt;form&gt;表单元素&lt;/form&gt;
+&lt;input type="类型"&gt;输入&lt;/input&gt;
+&lt;textarea&gt;文本框&lt;/textarea&gt;
+&lt;label&gt;为 input 元素定义标注&lt;/label&gt;
+&lt;fieldset&gt;在相关表单元素周围绘制边框/fieldset&gt;
+&lt;legend&gt;为&lt;fieldset&gt;元素定义标题&lt;/legend&gt;
+&lt;select&gt;下拉选项列表&lt;/select&gt;
+&lt;optgroup&gt;定义选项组&lt;/optgroup&gt;
+&lt;option&gt;&lt;select&gt;的选项&lt;/option&gt;
+&lt;button&gt;定义一个按钮&lt;/button&gt;
+&lt;datalist&gt;定义一个&lt;input&gt;元素可能选项列表&lt;/datalist&gt;
+&lt;output&gt;定义一个计算结果&lt;/output&gt;
+
+&lt;form&gt;
+&lt;fieldset&gt;
+&lt;legend&gt;表单DEMO&lt;/legend&gt;
+输入框: &lt;input type="text" name="user"&gt;&lt;br/&gt;
+密码框: &lt;input type="password" name="pwd"&gt;&lt;br/&gt;
+单选框: &lt;input type="radio" name="singleChoose" value="1"&gt;&lt;br/&gt;
+复选框: &lt;input type="checkbox" name="muilChoose" value="1"&gt;&lt;br/&gt;
+提交按钮: &lt;input type="submit" value="提交"&gt;&lt;br/&gt;
+下拉列表: &lt;select&gt;
+    &lt;optgroup label="分类1"&gt;
+            &lt;option value="1"&gt;1&lt;/option&gt;
+    &lt;/optgroup&gt;
+    &lt;optgroup label="分类2" disabled&gt;
+            &lt;option value="2" selected&gt;2&lt;/option&gt;       &lt;/optgroup&gt;
+    &lt;/select&gt;&lt;br/&gt;
+文本框: &lt;textarea rows="2" cols="30"&gt;我是一个文本框&lt;/textarea&gt;
+按钮: &lt;input type="button" value="按钮"&gt;或者&lt;button type="button"&gt;click&lt;/button&gt;
+&lt;/fieldset&gt;
+&lt;/form&gt;
+</code></pre>
+
+<p><fieldset>
+    <legend>表单DEMO</legend>
+输入框: <input type="text" name="user"><br/>
+密码框: <input type="password" name="pwd"><br/>
+单选框: <input type="radio" name="singleChoose" value="1"><br/>
+复选框: <input type="checkbox" name="muilChoose" value="1"><br/>
+提交按钮: <input type="submit" value="提交"><br/>
+下拉列表: <select>
+        <optgroup label="分类1">
+                <option value="1">1</option>
+        </optgroup>
+        <optgroup label="分类2" disabled>
+                <option value="2" selected>2</option>       </optgroup>
+        </select><br/>
+文本框: <textarea rows="2" cols="30">我是一个文本框</textarea><br/>
+按钮: <input type="button" value="按钮"><br/>
+<button type="button">click</button>
+</fieldset></p>
+
+<p><a id=10>10. 实体</a><br/></p>
+
+<pre><code>&lt; &amp;lt; &amp;#60;
+&gt; $gt; &amp;#62;
+© &amp;#169;
+</code></pre>
+
+<p><a href="http://www.runoob.com/html/html-tutorial.html">Runoob教程链接</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://macro44.github.io/blog/2015/12/16/htmlji-chu-biao-qian-zong-jie/</loc>
+    <lastmod>2015-12-16T10:31:14+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://macro44.github.io/blog/2015/12/14/ios-appke-zhi-xing-wen-jian-shou-shen-er/</loc>
     <lastmod>2015-12-14T18:11:05+08:00</lastmod>
   </url>
@@ -59,5 +63,8 @@
   </url>
   <url>
     <loc>http://macro44.github.io/blog/categories/octopress/</loc>
+  </url>
+  <url>
+    <loc>http://macro44.github.io/blog/categories/html/</loc>
   </url>
 </urlset>
