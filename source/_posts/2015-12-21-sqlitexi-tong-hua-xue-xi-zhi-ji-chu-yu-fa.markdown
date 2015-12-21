@@ -7,11 +7,16 @@ categories: SQLite
 ---
 > 之前在项目中使用sqlite的时候，都是使用现成的基本框架，没有具体细致的去了解sqlite的从无到有的使用，最近有时间看一下sqlite语法，分为两个部分来总结一下sqlite的语法，第一部分主要用来写一些sqlite语法。主要分为两篇，这是之一，基础语法篇，还有一篇高级语法篇。第二部分用来分析在iOS项目中sqlite框架的构成，以及基本使用。
 
+<!--more-->
 本教程目录：
 <script>
 function alertWarming(){
-	alert("adsfas");
+	alert("因为本部分在iOS上用不上，所以忽略！");
 }
+function backToMenu(){
+	window.scrollTo(0,100);
+}
+
 </script>
 
 <dl>
@@ -154,8 +159,13 @@ Affinity类型每一种包含的具体类型参照表:
 
 <br/>
 <a id=2.1>2.1 SQLite创建数据库</a><br/>
-
+**因为本部分在iOS上用不上，所以忽略！**
+<input type="button" value="返回目录" onclick=backToMenu()>
 
 <a id=2.2>2.2 SQLite关联数据库</a><br/>
+**因为本部分在iOS上用不上，所以忽略！**
+<input type="button" value="返回目录" onclick=backToMenu()>
 
 <a id=2.3>2.3 SQLite分离数据库</a><br/>
+**因为本部分在iOS上用不上，所以忽略！**
+<input type="button" value="返回目录" onclick=backToMenu()>
