@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+
+<head>
+
+
+<meta charset="utf-8">
+<meta http-equiv="cleartype" content="on">
+
+<title>Sqlite系统化学习之基础语法 - 谁在弹一曲东风破</title>
+<meta name="author" content="Macro">
+
+
+
+
+<meta name="description" content="我在你看不到的天空，看着灿烂的烟火">
+
+<meta name="keywords" content="sqlite ">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Twitter Cards -->
+
+
+<!-- Open Graph -->
+<meta property="og:local" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://macro44.github.io/blog/2015/12/21/sqlitexi-tong-hua-xue-xi-zhi-ji-chu-yu-fa">
+<meta property="og:title" content="sqlite系统化学习之基础语法">
+<meta property="og:description" content="我在你看不到的天空，看着灿烂的烟火">
+
+  <meta property="og:image" content="">
+
+<meta property="og:site_name" content="谁在弹一曲东风破">
+
+<link rel="canonical" href="http://macro44.github.io/blog/2015/12/21/sqlitexi-tong-hua-xue-xi-zhi-ji-chu-yu-fa">
+<link href="/favicon.png" rel="icon">
+<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="/atom.xml" rel="alternate" title="谁在弹一曲东风破" type="application/atom+xml">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+<script>Modernizr || document.write('<script src="/javascripts/vendor/modernizr-2.6.2.custom.min.js"><\/script>') </script>
+
+
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+
+</head>
+
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="/">首页</a></li>
+		<li>
+			<a href="#">关于我</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="/images/avatar.jpg" alt="Macro photo" class="author-photo">
+					<h4>Macro</h4>
+					<p>实践过的真知，不总结反思，等于浪费资源!</p>
+				</li>
+				<li><a href="true">Learn More</a></li>
+				<li>
+					<a href="mailto:macro_zj@163.com"><i class="fa fa-envelope"></i> Email</a>
+				</li>
+				
+				
+				<li>
+					<a href="https://github.com/macro44"><i class="fa fa-github"></i> GitHub</a>
+				</li>
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="/categories/">所有分类</a>
+<!-- 			<ul class="dl-submenu"> -->
+		<!-- 
+		<li><a href="/posts/"></a></li>
+				<li><a href="">所有分类</a></li>
+			</ul>
+ -->
+		</li>
+		
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="/blog/2015/12/21/sqlitexi-tong-hua-xue-xi-zhi-ji-chu-yu-fa/" rel="bookmark" title="sqlite系统化学习之基础语法">sqlite系统化学习之基础语法</a></h1>
+        
+        <h2>December 21, 2015</h2>
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <blockquote><p>之前在项目中使用sqlite的时候，都是使用现成的基本框架，没有具体细致的去了解sqlite的从无到有的使用，最近有时间看一下sqlite语法，分为两个部分来总结一下sqlite的语法，第一部分主要用来写一些sqlite语法。主要分为两篇，这是之一，基础语法篇，还有一篇高级语法篇。第二部分用来分析在iOS项目中sqlite框架的构成，以及基本使用。</p></blockquote>
+
+<p>本教程目录：</p>
+
+<script>
+function alertWarming(){
+    alert("adsfas");
+}
+</script>
+
+
+
+
+<dl>
+    <dt><a href=#1.1>1. SQLite数据类型</a></dt>
+        <dd><a href=#1.1>1.1 SQLite存储类</a><br/>    
+            <a href=#1.2>1.2 Boolean数据类型</a><br/>
+            <a href=#1.3>1.3 Date与Time数据类型</a><br/>
+            <a href=#1.4>1.4 SQLite 亲和(Affinity)类型</a>
+        </dd>
+    <dt><a href=#2.1 onclick="alertWarming()">2. SQLite数据库</a><br/></dt>
+        <dd><a href=#2.1 onclick="alertWarming()">2.1 SQLite创建数据库</a><br/>
+            <a href=#2.2 onclick="alertWarming()">2.2 SQLite关联数据库</a><br/>
+            <a href=#2.3 onclick="alertWarming()">2.3 SQLite分离数据库</a>
+        </dd>
+</dl>
+
+
+<p><a id=1.1>1.1 SQLite存储类</a></p>
+
+<table>
+<thead>
+<tr>
+<th> 存储类 </th>
+<th> 描述        </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td> NULL  </td>
+<td>值是一个NULL值.</td>
+</tr>
+<tr>
+<td> INTEGER </td>
+<td> 值是一个带符号的整形，根据值的大小存储在1、2、3、4、6、8字节中</td>
+</tr>
+<tr>
+<td>REAL</td>
+<td> 值是一个浮点值,存储为8字节点的IEE浮点数字</td>
+</tr>
+<tr>
+<td>TEXT</td>
+<td>值是一个文本字符串</td>
+</tr>
+<tr>
+<td>BLOB</td>
+<td>用于存储blob数据段，如图片、语音、视频等</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><a id=1.2>1.2 Boolean数据类型</a><br/>
+    Sqlite没有单独的Boolean存储类,布尔值被存储为整数0和1</p>
+
+<p><a id=1.3>1.3 Date与Time数据类型</a><br/>
+SQLite没有单独的用语存储日期或时间的存储类，但是SQLite能够把日期和时间存储为TEXT、REAL或INTEGER值.</p>
+
+<table>
+<thead>
+<tr>
+<th>存储类</th>
+<th>日期格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TEXT</td>
+<td>格式为"YYYY-MM-DD HH:MM:SS.SSS"的日期</td>
+</tr>
+<tr>
+<td>REAL</td>
+<td>从公元前4714年11月24日格林尼治的正午开始算起的天数</td>
+</tr>
+<tr>
+<td>INTEGER</td>
+<td>从1970-01－01 00:00:00 UTC算起的秒数.</td>
+</tr>
+</tbody>
+</table>
+
+
+<p><a id=1.4>1.4 SQLite 亲和(Affinity)类型</a></p>
+
+<table border='1' cellspacing="0" style="text-align:center">
+<tr>
+    <th>Affinity</th>
+    <th>描述</th>
+</tr>
+<tr>
+    <td>TEXT</td>
+    <td>该列使用存储类NULL、TEXT或BLOB存储所有数据</td>
+</tr>
+<tr>
+    <td>NUMERIC</td>
+    <td>该列可以包含使用所有五个存储类的值。</td>
+</tr>
+<tr>
+    <td>INTEGER</td>
+    <td>与带有 NUMERIC affinity 的列相同，在 CAST 表达式中带有异常。</td>
+</tr>
+<tr>
+    <td>REAL</td>
+    <td>与带有 NUMERIC affinity 的列相似，不同的是，它会强制把整数值转换为浮点表示。</td>
+</tr>
+<tr>
+    <td>NONE</td>
+    <td>    带有 affinity NONE 的列，不会优先使用哪个存储类，也不会尝试把数据从一个存储类强制转换为另一个存储类。</td>
+</tr>
+</table>
+
+
+<p>Affinity类型每一种包含的具体类型参照表:</p>
+
+<div align="center">
+<table border='1' cellspacing="0" style="text-align:center">
+<tr>
+    <th>数据类型</th>
+    <th>Affinity</th>
+<tr>
+<tr>
+    <td>
+        <ul>
+            <li>INT</li>
+            <li>INTEGER</li>
+            <li>TINYINT</li>
+            <li>SMALLINT</li>
+            <li>MEDIUMINT</li>
+            <li>BIGINT</li>
+            <li>UNSIGNED BIG INT</li>
+            <li>INT2</li>
+            <li>INT8</li>
+        </ul>
+    </td>
+    <td>INTEGER</td>
+</tr>
+<tr>
+    <td>
+        <ul>
+            <li>CHARACTER(20)</li>
+            <li>VARCHAR(255)</li>
+            <li>VARYING CHARACTER(255)</li>
+            <li>NCHAR(55)</li>
+            <li>NATIVE CHARACTER(70)</li>
+            <li>NVARCHAR(100)</li>
+            <li>TEXT</li>
+            <li>CLOB</li>
+         </ul>
+    </td>
+    <td>TEXT</td>
+</tr>
+<tr>
+    <td>
+        <ul>
+            <li>BLOB</li>
+            <li>no datatype specified</li>
+        </ul>
+    </td>
+    <td>NONE</td>
+</tr>
+<tr>
+    <td>
+        <ul>
+            <li>REAL</li>
+            <li>DOUBLE</li>
+            <li>DOUBLE PRECISION</li>
+            <li>FLOAT</li>
+        </ul>
+    </td>
+    <td>REAL</td>
+</tr>
+<tr>
+    <td>
+        <ul>
+            <li>NUMERIC</li>
+            <li>DECIMAL(10,5)</li>
+            <li>BOOLEAN</li>
+            <li>DATE</li>
+            <li>DATETIME</li>
+        </ul>
+    </td>
+    <td>NUMERIC</td>
+</tr>
+</table>
+</div>
+
+
+<p><br/>
+<a id=2.1>2.1 SQLite创建数据库</a><br/></p>
+
+<p><a id=2.2>2.2 SQLite关联数据库</a><br/></p>
+
+<p><a id=2.3>2.3 SQLite分离数据库</a><br/></p>
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="/categories/#sqlite" title="Pages tagged sqlite" class="tag">sqlite</a></span>
+        <span><a href="/blog/2015/12/21/sqlitexi-tong-hua-xue-xi-zhi-ji-chu-yu-fa/" rel="bookmark" title="sqlite系统化学习之基础语法">sqlite系统化学习之基础语法</a> was published on <span class="entry-date date published updated"><time datetime="2015-12-21T15:07:31+08:00">December 21, 2015</time></span></span>
+        
+        <span class="author vcard"><span class="fn"><a href="" title="About Macro">Macro</a></span></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    
+      <div class="read-more">
+        
+          <div class="read-more-header">
+            <a href="/blog/2015/12/16/htmlji-chu-biao-qian-zong-jie/" class="btn">Read More</a>
+          </div><!-- /.read-more-header -->
+          <div class="read-more-content">
+            <h3><a href="/blog/2015/12/16/htmlji-chu-biao-qian-zong-jie/" title="HTML基础标签总结">HTML基础标签总结</a></h3>
+            <p>离不开H5，就尽情的享受HTML带来的方便。学H5，从基本的HTML开始；目录:1. HTML基本文档2. HTML基本标签3. HTML文本格式化4. 链接5. 样式/区块6. 表格7. 列表8. 框架9. 表单10. 实体1. HTML基本文档&lt;!DOCTYPE &hellip;&hellip; <a href="/blog/2015/12/16/htmlji-chu-biao-qian-zong-jie/"> Continue reading</a></p>
+          </div><!-- /.read-more-content -->
+        
+        <div class="read-more-list">
+          
+            <div class="list-item">
+              <h4><a href="/blog/2015/12/14/ios-appke-zhi-xing-wen-jian-shou-shen-er/" title="iOS App可执行文件瘦身(二)">iOS App可执行文件瘦身(二)</a></h4>
+              <span>Published on December 14, 2015</span>
+            </div><!-- /.list-item -->
+          
+            <div class="list-item">
+              <h4><a href="/blog/2015/12/14/ios-appke-zhi-xing-wen-jian-shou-shen-%5B%3F%5D/" title="iOS App可执行文件瘦身(一)">iOS App可执行文件瘦身(一)</a></h4>
+              <span>Published on December 14, 2015</span>
+            </div><!-- /.list-item -->
+          
+        </div><!-- /.read-more-list -->
+      </div><!-- /.read-more -->
+    
+    
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2015 Macro. Powered by <a href="http://octopress.org">Octopress</a> using the <a href="https://github.com/jez/hpstr-theme/">HPSTR Theme for Octopress</a>.</span>
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+
+	        
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/javascripts/octopress.js" type="text/javascript"></script>
+<script src="/javascripts/scripts.min.js"></script>
+
+
+
+
+
+
+	        
+
+</body>
+</html>
