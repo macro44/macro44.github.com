@@ -18,6 +18,15 @@ function backToMenu(){
 	window.scrollTo(0,100);
 }
 
+function mOver(obj){
+	var x=document.getElementById("dataList");
+	x.style.visibility='visible';
+}
+
+function mOut(obj){
+	var x=document.getElementById("dataList");
+	x.style.visibility='hidden';
+}
 </script>
 
 <dl>
@@ -44,16 +53,36 @@ function backToMenu(){
 			<a href=#4.3>4.3 逻辑运算符</a><br/>
 			<a href=#4.4>4.4 位运算符</a>
 		</dd>
-	
 	</dt>	
+	
+	<dt><a href=#5.1>5. SQLite 表达式</a></dt>
+		<dd><a href=#5.1>5.1 基本查询语句</a><br/>
+			<a href=#5.2>5.2 布尔表达式</a><br/>
+			<a href=#5.3>5.3 数值表达式</a><br/>
+			<a href=#5.4>5.4 日期表达式</a><br/>
+		</dd>
 		
-	<dt><a href=#6.1>6. SQL基本操作</a><br/></dt>
-		<dd><a href=#6.1>6.1 SQL Insert语句</a><br/>
-			<a href=#6.2>6.2 SQL Delete语句</a><br/>
-			<a href=#6.3>6.3 SQL Update语句</a><br/>
-			<a href=#6.4>6.4 SQL Select语句</a>
+	<dt><a href=#6.1>6. SQLite 关键字子句</a></dt>
+		<dd><a href=#6.1>6.1 Where子句</a><br/>
+			<a href=#6.2>6.2 And/Or子句</a><br/>
+			<a href=#6.3>6.3 Like子句</a><br/>
+			<a href=#6.4>6.4 Glob子句</a><br/>
+			<a href=#6.5>6.5 Limit子句</a><br/>
+			<a href=#6.6>6.6 Order By子句</a><br/>
+			<a href=#6.7>6.7 Group By子句</a><br/>
+			<a href=#6.8>6.8 Having子句</a><br/>
+			<a href=#6.9>6.9 Distinct关键字</a><br/>
+		</dd>
+		
+	<dt><a href=#7.1>7. SQL基本操作</a><br/></dt>
+		<dd><a href=#7.1>7.1 SQL Insert语句</a><br/>
+			<a href=#7.2>7.2 SQL Delete语句</a><br/>
+			<a href=#7.3>7.3 SQL Update语句</a><br/>
+			<a href=#7.4>7.4 SQL Select语句</a>
 		</dd>
 </dl>
+
+>提示:本基础语法篇的例子都是基于<a href=#0>附录数据表</a>
 
 <a id=1.1>1.1 SQLite存储类</a>
 
@@ -363,6 +392,7 @@ Affinity类型每一种包含的具体类型参照表:
 	<td>UNIQUE 运算符搜索指定表中的每一行，确保唯一性（无重复）。</td>
 </tr>
 </table>
+<font color=red>\*\*需要注意的是,exists运算符返回的是条件满足的表的所有数据，而不是指定数据行，一定要注意理解!\*\*</font>
 
 <a id=4.4>4.4 位运算符</a><br/>
 
@@ -399,20 +429,212 @@ Affinity类型每一种包含的具体类型参照表:
 </tr>
 </table>
 
-<a id=6.1>6.1 SQL Insert语句</a><br/>
+<a id=5.1>5.1 基本查询语句</a><br/>
+	
+	基本语法:
+	SELECT column1, column2, columnN 
+	FROM table_name 
+	WHERE [CONTION | EXPRESSION];
+	
+<span  style="color:red">[例子]:</span>SELECT * FROM company;
+		
+<a id=5.2>5.2 布尔表达式</a><br/>
+
+	基本语法:
+	SELECT column1, column2, columnN 
+	FROM table_name 
+	WHERE SINGLE VALUE MATCHTING EXPRESSION;
+此部分应结合<a href=#4.2>比较运算符</a>一起看;  
+<div><span style="color:red">[例子]:</span> SELECT * FROM company WHERE salary=20000;</div>
+
+<a id=5.3>5.3 数值表达式</a><br/>
+
+	基本语法:
+	SELECT numerical_expression as  OPERATION_NAME
+	[FROM table_name WHERE CONDITION] ;
+	
+	其实最常用的还是几个内置的函数 avg() sum() count()d等等；
+<div><span style="color:red">[例子]:</span>SELECT COUNT(*) FROM company;</div>
+
+<a id=5.4>5.4 日期表达式</a><br/>
+
+	被用作返回系统当前日期和时间值;
+	基本语法：
+	SELECT CURRENT_TIMESTAMP；
+
+<a id=6.1>6.1 Where子句</a><br/>
+
+	基本语法：
+	SELECT column1, column2, columnN 
+	FROM table_name
+	WHERE [condition]
+<div><span style="color:red">[例子]:</span> SELECT * FROM company WHERE age=32;</div>	
+<a id=6.2>6.2 And/Or子句</a><br/>
+
+	基本语法：
+	SELECT column1, column2, columnN 
+	FROM table_name
+	WHERE [condition1] AND／OR [condition2]...OR [conditionN];
+<div><span style="color:red">[例子]:</span> SELECT * FROM company WHERE age=32 And 	salary>30000;<br/>
+	SELECT * FROM company WHERE age=32 OR salary>30000;
+</div>
+			
+<a id=6.3>6.3 Like子句</a><br/>
+
+	SQLite的like运算符是用来匹配通配符指定模式的文本值。如果搜索结果与符合like表达式的指定的模
+	式，like运算符将返回真（1），否则为假（0）; 
+	
+	通配符：
+			百分号( % ): 代表零个、一个或多个数字或字符。
+			下划线( _ ): 代表单个数字或字符.
+			
+	基本语法:
+			SELECT FROM table_name WHERE column LIKE 'XXXX%'
+
+			or 
+
+			SELECT FROM table_name WHERE column LIKE '%XXXX%'
+
+			or
+
+			SELECT FROM table_name WHERE column LIKE 'XXXX_'
+
+			or
+
+			SELECT FROM table_name WHERE column LIKE '_XXXX'
+
+			or
+
+			SELECT FROM table_name WHERE column LIKE '_XXXX_'
+<div><span style="color:red">[例子]:</span> SELECT * FROM company WHERE age like '2%';</div>
+	
+<a id=6.4>6.4 Glob子句</a><br/>
+	
+	SQLite 的 GLOB 运算符是用来匹配通配符指定模式的文本值。如果搜索表达式与模式表达式匹配，GLOB
+	运算符将返回真（true），也就是 1。与 LIKE 运算符不同的是，GLOB 是大小写敏感的，对于下面的通
+	配符，它遵循 UNIX 的语法。
+	
+	通配符: 
+			星号( * ): 代表零个、一个或多个数字或字符.
+			问好( ? ): 代表单个数字或字符.
+			
+	基本语法：
+			SELECT FROM table_name WHERE column GLOB 'XXXX*'
+
+			or 
+
+			SELECT FROM table_name WHERE column GLOB '*XXXX*'
+
+			or
+
+			SELECT FROM table_name WHERE column GLOB 'XXXX?'
+
+			or
+
+			SELECT FROM table_name WHERE column GLOB '?XXXX'
+
+			or
+
+			SELECT FROM table_name WHERE column GLOB '?XXXX?'
+
+			or
+
+			SELECT FROM table_name WHERE column GLOB '????'
+	
+<a id=6.5>6.5 Limit子句</a><br/>
+
+	基本语法:
+	SELECT column1, column2, columnN 
+	FROM table_name
+	LIMIT [no of rows]
+	
+	与Offset子句一起使用的语法:
+	SELECT column1, column2, columnN 
+	FROM table_name
+	LIMIT [no of rows] OFFSET [row num]
+<div><span style="color:red">[例子]:</span> SELECT * FROM company LIMIT 3;<br/>
+SELECT * FROM company LIMIT 3 OFFSET 2;
+</div>
+
+<a id=6.6>6.6 Order By子句</a><br/>
+	
+	用于基于一个或多个列按升序或降序排列数据；
+	
+	基本语法：
+			SELECT column-list 
+			FROM table_name 
+			[WHERE condition] 
+			[ORDER BY column1, column2, .. columnN] [ASC | DESC];
+<div><span style="color:red">[例子]:</span> SELECT * FROM company ORDER BY salary ASC ,age DESC;
+</div>	
+
+<a id=6.7>6.7 Group By子句</a><br/>
+	
+	SQLite 的 GROUP BY 子句用于与 SELECT 语句一起使用，来对相同的数据进行分组。
+	在 SELECT 语句中，GROUP BY 子句放在 WHERE 子句之后，放在 ORDER BY 子句之前。
+	
+	基本语法:
+			SELECT column-list
+			FROM table_name
+			WHERE [ conditions ]
+			GROUP BY column1, column2....columnN
+			ORDER BY column1, column2....columnN
+<div><span style="color:red">[例子]:</span> SELECT name,sum(salary) FROM company GROUP BY name ORDER BY salary ASC;
+</div>				
+	
+<a id=6.8>6.8 Having子句</a><br/>
+
+	HAVING 子句允许指定条件来过滤将出现在最终结果中的分组结果。WHERE 子句在所选列上设置条件，
+	而 HAVING 子句则在由 GROUP BY 子句创建的分组上设置条件
+	
+	基本语法：
+			SELECT column1, column2
+			FROM table1, table2
+			WHERE [ conditions ]
+			GROUP BY column1, column2
+			HAVING [ conditions ]
+			ORDER BY column1, column2
+<div><span style="color:red">[例子]:</span> SELECT name,sum(salary) FROM company GROUP BY name HAVING count(name) < 2 ORDER BY salary ASC;
+</div>	
+
+<a id=6.9>6.9 Distinct关键字</a><br/>
+
+	SQLite 的 DISTINCT 关键字与 SELECT 语句一起使用，来消除所有重复的记录，并只获取唯一一次记
+	录。有可能出现一种情况，在一个表中有多个重复的记录。当提取这样的记录时，DISTINCT 关键字就显得
+	特别有意义，它只获取唯一一次记录，而不是获取重复记录。
+	
+	基本语法:
+			SELECT DISTINCT column1, column2,.....columnN 
+			FROM table_name
+			WHERE [condition]
+<div><span style="color:red">[例子]:</span> SELECT DISTINCT name FROM company;
+</div>
+
+<a id=7.1>7.1 SQL Insert语句</a><br/>
 
 	基本语法:INSERT INTO TABLE_NAME (column1,...columnN) VALUES (value1,...valueN);
 	当要为表中所有列添加值，这时可以不用指定列名称,此时语法结构可以为:
 	INSERT INTO TABLE_NAME VALUES (value1, ...valueN);
-<a id=6.2>6.2 SQL Delete语句</a><br/>
+<a id=7.2>7.2 SQL Delete语句</a><br/>
 	
 	基本语法结构:DELETE FROM table_name WHERE [condition];		
-<a id=6.3>6.3 SQL Update语句</a><br/>
+<a id=7.3>7.3 SQL Update语句</a><br/>
 
 	基本语法结构:UPDATE table_name SET column1 = value1...., columnN = valueN 
 	WHERE [condition];
 
-<a id=6.4>6.4 SQL Select语句</a>
+<a id=7.4>7.4 SQL Select语句</a>
 
 	基本语法结构:SELECT column1, column2,... columnN FROM table_name;
 	如果要查询所有的数据，可以用 select * from table_name;
+	
+<a id=0>附录数据表(一):</a><input type="button" value="返回顶部" onclick=backToMenu()>
+	
+	id          name        age         address     salary    
+	----------  ----------  ----------  ----------  ----------
+	1           Paul        32          California  20000.0   
+	2           Allen       25          Texas       15000.0   
+	3           Teddy       23          Norway      20000.0   
+	4           Mark        25          Rich-Mod    65000.0   
+	5           David       27          Texas       85000.0   
+	6           Kim         22          South-Hall  45000.0 
