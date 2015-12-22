@@ -85,14 +85,32 @@ function mOut(obj){
 >提示:本基础语法篇的例子都是基于<a href=#0>附录数据表</a>
 
 <a id=1.1>1.1 SQLite存储类</a>
-
-| 存储类 | 描述		|
-|-------|----------	|
-| NULL	|值是一个NULL值.|
-| INTEGER | 值是一个带符号的整形，根据值的大小存储在1、2、3、4、6、8字节中|
-|REAL| 值是一个浮点值,存储为8字节点的IEE浮点数字|
-|TEXT|值是一个文本字符串|
-|BLOB|用于存储blob数据段，如图片、语音、视频等|
+<table border=1 cellspacing=0 style="text-algn:center">
+<tr>
+	<th width=20%>存储类</th>
+	<th width=80%>描述</th>
+</tr>
+<tr> 
+	<td>NULL</td>
+	<td>值是一个NULL值.</td>
+</tr>
+<tr>
+	<td>INTEGER</td>
+	<td>值是一个带符号的整形，根据值的大小存储在1、2、3、4、6、8字节中</td>
+</tr>
+<tr>
+	<td>REAL</td>
+	<td>值是一个浮点值,存储为8字节点的IEE浮点数字</td>
+</tr>
+<tr>
+	<td>TEXT</td>
+	<td>值是一个文本字符串</td>
+</tr>
+<tr>
+	<td>BLOB</td>
+	<td>用于存储blob数据段，如图片、语音、视频等</td>
+</tr>
+</table>
 
 <a id=1.2>1.2 Boolean数据类型</a><br/>
 	Sqlite没有单独的Boolean存储类,布尔值被存储为整数0和1
@@ -100,11 +118,24 @@ function mOut(obj){
 <a id=1.3>1.3 Date与Time数据类型</a><br/>
 SQLite没有单独的用语存储日期或时间的存储类，但是SQLite能够把日期和时间存储为TEXT、REAL或INTEGER值.
 
-|存储类|日期格式|
-|-----|-------|
-|TEXT|格式为"YYYY-MM-DD HH:MM:SS.SSS"的日期|
-|REAL|从公元前4714年11月24日格林尼治的正午开始算起的天数|
-|INTEGER|从1970-01－01 00:00:00 UTC算起的秒数.|
+<table border=1 cellspacing=0 style="text-algn:center">
+<tr>
+	<th width=20%>存储类</th>
+	<th width=100%>日期格式</th>
+</tr>
+<tr> 
+	<td>TEXT</td>
+	<td>格式为"YYYY-MM-DD HH:MM:SS.SSS"的日期</td>
+</tr>
+<tr>
+	<td>REAL</td>
+	<td>从公元前4714年11月24日格林尼治的正午开始算起的天数</td>
+</tr>
+<tr>
+	<td>INTEGER</td>
+	<td>从1970-01－01 00:00:00 UTC算起的秒数.</td>
+</tr>
+</table>
 
 <a id=1.4>1.4 SQLite 亲和(Affinity)类型</a>
 
@@ -139,8 +170,8 @@ Affinity类型每一种包含的具体类型参照表:
 <div align="center">
 <table border='1' cellspacing="0" style="text-align:center">
 <tr>
-	<th>数据类型</th>
-	<th>Affinity</th>
+	<th width=80%>数据类型</th>
+	<th width=30%>Affinity</th>
 <tr>
 <tr>
 	<td>
