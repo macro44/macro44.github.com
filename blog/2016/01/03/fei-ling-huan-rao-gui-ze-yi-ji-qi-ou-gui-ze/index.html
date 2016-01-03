@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta http-equiv="cleartype" content="on">
 
-<title>OC中的@dynamic - 谁在弹一曲东风破</title>
+<title>非零环绕规则以及奇偶规则 - 谁在弹一曲东风破</title>
 <meta name="author" content="Macro">
 
 
@@ -18,7 +18,7 @@
 
 <meta name="description" content="我在你看不到的天空，看着灿烂的烟火">
 
-<meta name="keywords" content="ios ">
+<meta name="keywords" content="其他 ">
 
 
 <!-- http://t.co/dKP3o1e -->
@@ -32,15 +32,15 @@
 <!-- Open Graph -->
 <meta property="og:local" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:url" content="http://macro44.github.io/blog/2015/12/07/oczhong-de-at-dynamic">
-<meta property="og:title" content="OC中的@dynamic">
+<meta property="og:url" content="http://macro44.github.io/blog/2016/01/03/fei-ling-huan-rao-gui-ze-yi-ji-qi-ou-gui-ze">
+<meta property="og:title" content="非零环绕规则以及奇偶规则">
 <meta property="og:description" content="我在你看不到的天空，看着灿烂的烟火">
 
   <meta property="og:image" content="">
 
 <meta property="og:site_name" content="谁在弹一曲东风破">
 
-<link rel="canonical" href="http://macro44.github.io/blog/2015/12/07/oczhong-de-at-dynamic">
+<link rel="canonical" href="http://macro44.github.io/blog/2016/01/03/fei-ling-huan-rao-gui-ze-yi-ji-qi-ou-gui-ze">
 <link href="/favicon.png" rel="icon">
 <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -106,104 +106,17 @@
     <header class="header-title">
       <div class="header-title-wrap">
         
-          <h1 class="entry-title"><a href="/blog/2015/12/07/oczhong-de-at-dynamic/" rel="bookmark" title="OC中的@dynamic">OC中的@dynamic</a></h1>
+          <h1 class="entry-title"><a href="/blog/2016/01/03/fei-ling-huan-rao-gui-ze-yi-ji-qi-ou-gui-ze/" rel="bookmark" title="非零环绕规则以及奇偶规则">非零环绕规则以及奇偶规则</a></h1>
         
-        <h2>December 07, 2015</h2>
+        <h2>January 03, 2016</h2>
       </div><!-- /.header-title-wrap -->
     </header>
     <div class="entry-content">
-      <blockquote><p>在分析一份代码的时候，遇到了@dynamic，以前也遇到过，但是没有系统的总结一下，刚好有空，系统总结一下，为以后的使用做好准备；</p></blockquote>
-
-<p>一、@dynamic与@synthesize的区别</p>
-
-<ol>
-<li>@property有两个对应的词，一个是@synthesize,另一个是@dynamic,当两个都没写的时候，系统会默认为写了@property的属性添加@synthesize var=_var;</li>
-<li>@synthesize的语义为如果你没有重写getter或setter方法，系统会自动帮忙生成getter和setter方法，@dynamic的语义为getter和setter方法由用户自己实现，不自动生成；</li>
-</ol>
-
-
-<!--more-->
-
-
-<p>二、@dynamic的读取<br/>
-View.h</p>
-
-<pre><code>#import &lt;UIKit/UIKit.h&gt;
-
-@interface View : UIView
-{
-    NSString * _name;
-}
-
-@property (nonatomic,copy) NSString *name;
-
-@end
-</code></pre>
-
-<p>View.m</p>
-
-<pre><code>#import "View.h"
-
-@implementation View
-
-@dynamic name;
-
-- (void)setName:(NSString *)name{
-   _name = name;
-}
-
-- (NSString*)name{
-   return _name;
-}
-
-@end
-</code></pre>
-
-<p>如果没有写setter和getter两个方法，调用的时候，[[View alloc] init].name会报错，但是将@dynamic换成@synthesize的话没有getter和setter也不会有问题；</p>
-
-<p>三、@dynamic的使用</p>
-
-<ol>
-<li>用于NSManagedObject中，告诉编译器不要处理属性的getter和setter方法，由CoreData框架来生成getter和setter方法</li>
-<li><p>用于分类中,具体使用需要结合到runtime，让分类可以存在属性变量<br/>
-例子如下：<br/>
-NSObject + AAA.h</p>
-
-<pre><code>  #import &lt;Foundation/Foundation.h&gt;
-
-  @interface NSObject (AAA)
-  @property (nonatomic,copy) NSString *aaa;
-
-  @end
-</code></pre></li>
-</ol>
-
-
-<p>NSObjct + AAA.m</p>
-
-<pre><code>    #import "NSObject+AAA.h"
-    #import &lt;objc/runtime.h&gt;
-
-    static const void *kAAAIdentifier = (void*)@"kAAAIdentifier";
-
-    @implementation NSObject (AAA)
-
-    @dynamic aaa;
-
-    - (void)setAaa:(NSString *)aaa{
-            objc_setAssociatedObject(self, kAAAIdentifier, aaa, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-    }
-
-    - (NSString*)aaa{
-        return  objc_getAssociatedObject(self, kAAAIdentifier);
-    }
-
-    @end
-</code></pre>
+      
 
       <footer class="entry-meta">
-        <span class="entry-tags"><a href="/categories/#ios" title="Pages tagged ios" class="tag">ios</a></span>
-        <span><a href="/blog/2015/12/07/oczhong-de-at-dynamic/" rel="bookmark" title="OC中的@dynamic">OC中的@dynamic</a> was published on <span class="entry-date date published updated"><time datetime="2015-12-07T16:58:12+08:00">December 07, 2015</time></span></span>
+        <span class="entry-tags"><a href="/categories/#其他" title="Pages tagged 其他" class="tag">其他</a></span>
+        <span><a href="/blog/2016/01/03/fei-ling-huan-rao-gui-ze-yi-ji-qi-ou-gui-ze/" rel="bookmark" title="非零环绕规则以及奇偶规则">非零环绕规则以及奇偶规则</a> was published on <span class="entry-date date published updated"><time datetime="2016-01-03T17:27:15+08:00">January 03, 2016</time></span></span>
         
         <span class="author vcard"><span class="fn"><a href="" title="About Macro">Macro</a></span></span>
         
@@ -213,23 +126,23 @@ NSObject + AAA.h</p>
       <div class="read-more">
         
           <div class="read-more-header">
-            <a href="/blog/2016/01/03/fei-ling-huan-rao-gui-ze-yi-ji-qi-ou-gui-ze/" class="btn">Read More</a>
+            <a href="/blog/2015/12/21/sqlitexi-tong-hua-xue-xi-zhi-ji-chu-yu-fa/" class="btn">Read More</a>
           </div><!-- /.read-more-header -->
           <div class="read-more-content">
-            <h3><a href="/blog/2016/01/03/fei-ling-huan-rao-gui-ze-yi-ji-qi-ou-gui-ze/" title="非零环绕规则以及奇偶规则">非零环绕规则以及奇偶规则</a></h3>
-            <p>&hellip; <a href="/blog/2016/01/03/fei-ling-huan-rao-gui-ze-yi-ji-qi-ou-gui-ze/"> Continue reading</a></p>
+            <h3><a href="/blog/2015/12/21/sqlitexi-tong-hua-xue-xi-zhi-ji-chu-yu-fa/" title="sqlite系统化学习之基础语法">sqlite系统化学习之基础语法</a></h3>
+            <p>之前在项目中使用sqlite的时候，都是使用现成的基本框架，没有具体细致的去了解sqlite的从无到有的使用，最近有时间看一下sqlite语法，分为两个部分来总结一下sqlite的语法，第一部分主要用来写一些sqlite语法。主要分为两篇，这是之一，基础语法篇， &hellip;&hellip; <a href="/blog/2015/12/21/sqlitexi-tong-hua-xue-xi-zhi-ji-chu-yu-fa/"> Continue reading</a></p>
           </div><!-- /.read-more-content -->
         
         <div class="read-more-list">
           
             <div class="list-item">
-              <h4><a href="/blog/2015/12/21/sqlitexi-tong-hua-xue-xi-zhi-ji-chu-yu-fa/" title="sqlite系统化学习之基础语法">sqlite系统化学习之基础语法</a></h4>
-              <span>Published on December 21, 2015</span>
+              <h4><a href="/blog/2015/12/16/htmlji-chu-biao-qian-zong-jie/" title="HTML基础标签总结">HTML基础标签总结</a></h4>
+              <span>Published on December 16, 2015</span>
             </div><!-- /.list-item -->
           
             <div class="list-item">
-              <h4><a href="/blog/2015/12/16/htmlji-chu-biao-qian-zong-jie/" title="HTML基础标签总结">HTML基础标签总结</a></h4>
-              <span>Published on December 16, 2015</span>
+              <h4><a href="/blog/2015/12/14/ios-appke-zhi-xing-wen-jian-shou-shen-er/" title="iOS App可执行文件瘦身(二)">iOS App可执行文件瘦身(二)</a></h4>
+              <span>Published on December 14, 2015</span>
             </div><!-- /.list-item -->
           
         </div><!-- /.read-more-list -->
