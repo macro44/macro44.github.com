@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 其他 | 谁在弹一曲东风破]]></title>
   <link href="http://macro44.github.io/blog/categories/qi-ta/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2016-01-03T19:28:29+08:00</updated>
+  <updated>2016-01-03T19:30:31+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -26,6 +26,9 @@
 2.在学习HTML5 SVG属性的时候，碰到一个属性fill-rule，属性值可选为evenodd或者nonzero,这对应着的就是奇-偶规则和非零环绕规则.</p>
 
 <p><b style="color:red">从上面不难看出，在涉及到多边形的图形渲染的时候，渲染规则离不开这样的判断，判断一个点或一块区域是否需要渲染。两种判断对应着两种不同的结果.</b></p>
+
+<!--more-->
+
 
 <h3>概念</h3>
 
