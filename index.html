@@ -124,6 +124,245 @@
 <header>
   <div class="entry-meta">
     <span class="entry-date date published updated">
+      <time datetime="2016-01-15T17:25:23+08:00">
+        <a href="/blog/2016/01/15/luayuan-biao-metatable-yi-ji-yuan-biao-zai-dui-xiang-zhong-de-ying-yong/">January 15, 2016</a>
+      </time>
+    </span>
+    <span class="author vcard">
+      <span class="fn">
+        <a href="" title="About Macro">Macro</a>
+      </span>
+    </span>
+    
+  </div><!-- /.entry-meta -->
+  
+    <h1 class="entry-title">
+      <a href="/blog/2016/01/15/luayuan-biao-metatable-yi-ji-yuan-biao-zai-dui-xiang-zhong-de-ying-yong/" rel="bookmark" title="Lua元表(Metatable)以及元表在对象中的应用" itemprop="url">Lua元表(Metatable)以及元表在对象中的应用</a>
+    </h1>
+  
+</header>
+
+<div class="entry-content">
+  <blockquote><p>Lua table中我们可以通过访问key来获取value的值，但是却无法直接对两个table进行操作，此时我们通过元表修改操作符的行为，使其当面对一非预定义的操作时执行一个指定的操作.此行为可相较于c＋＋里面的运算符重载来看</p></blockquote>
+
+<p>元方法使用机制:首先检测一个操作中的值是否有元素,其次这些元素是否定义了关于次操作的方法.例如,两个表a+b,首先检查两个表是否有元素，之后检查是否有一个叫"__add"的字段，若找到则，则调用对应定义的值。其定义的值一般是一个函数就是“<b>元方法</b>”</p>
+
+<h3>设置元表以及获取元表的方法</h3>
+
+<ul>
+<li>setmetatable(table,metatable): 对指定table设置元表(metatable)，如果元表(metatable)中存在__metatable键值，setmetatable会失败 。</li>
+<li>getmetatable(table): 返回对象的元表(metatable)。</li>
+</ul>
+
+
+<p>创建元表以及获取元表</p>
+
+<pre><code>创建元表
+mytable = {}
+mymetatable = {}
+setmetatable(mytable,mymetatable)
+
+也可以写为
+mymetatable = {}
+mytable = setmetatable(mytable,mymetatable)
+
+获取元表 
+mymetatable = getmetatable(mytable) 
+</code></pre>
+
+<h3>__index元方法和__newindex元方法</h3>
+
+<p>__index元方法用于查看表中元素是否存在,如果不存在，则返回nil，否则则由__index返回结果<br/>
+__newIndex元方法向表中不存在索引赋值</p>
+
+<pre><code>--__index元方法
+tA = setmetatable({key1 = "value1"},{
+    __index = function(tA,key)
+        if key == key3 then
+            return "value3"
+        else
+            retrun tA[key]
+        end
+    end
+})
+
+--__newindex元方法
+mt = {}
+tA = setmetatable({key1="value1"},{
+    __newindex=mt
+})
+
+mytable.newkey = "新值2"
+print(mytable.newkey,mymetatable.newkey) -- nil 新值2
+
+mytable.key1 = "新值1"
+print(mytable.key1,mymetatable.key1)  －－新值1 nil
+</code></pre>
+
+<h3>表中添加操作符</h3>
+
+<p>__add、__sub、__mul、__div、__mod、__unm、__concat、__eq、__lt、__le</p>
+
+<pre><code>--__add元方法
+tA = {1,2,3}
+tB = {4,5,6}
+
+tM = {}
+tM.__add = function(t1,t2)
+    for _, item in pairs(t2) do
+        table.insert(t1,item)
+    end
+    return t1
+end
+
+setmetatable(tA,tM)
+
+tmun = tA + tB 
+
+for k,v in pairs(tmun) do
+    print(v)
+end
+
+--__lt元方法
+tM = {}
+tM.__lt = function(t1,t2)
+    return #t1 &lt; #t2
+end
+
+tA = {3}
+tB = {1,2}
+
+setmetatable(tA,tM)
+setmetatable(tB,tM)
+
+print(tA &lt; tB)
+</code></pre>
+
+<h3>元方法实例</h3>
+
+<pre><code>    Set = {}
+    mt = {} --元表
+
+    function Set.new(t)
+        local set = {}
+        setmetatable(set,mt)
+        for _,v in pairs(t) do
+            set[v] = true
+        end
+        return set
+    end
+
+    --tostring
+    function Set.toString(set)
+        local t = {}
+        for s in pairs(set) do
+            t[#t + 1] = s
+        end
+        return "{"..table.concat(t,",").."}"
+        end
+
+    function Set.print(s)
+        print(Set.toString(s))
+    end
+
+    --add
+    --对此方法的理解为，虚表上每一个值都有一个标志，当设置它为true时，则表明这个元素在虚表
+    中存在了。
+    function Set.add(t1,t2)
+
+        if getmetatable(a) ~= mt or getmetatable(b) ~= mt then
+         error("attemp to 'add' a set with a non-set value",                        2)   --error第二个参数的116
+         end
+
+        local res = Set.new{} --相当于new({})
+        for k in pairs(t1) do
+            res[k] = true
+        end
+
+        for k in pairs(t2) do
+            res[k] = true
+        end
+
+        return res
+    end
+
+    mt.__add = Set.add
+
+    --__sub
+    function Set.sub(t1,t2)
+        local res = Set.new{}
+        for k in pairs(t1) do
+            if t1[k] ~= t2[k] and not t2[k] then
+            res[k] = true
+        end 
+    end
+return res
+end
+
+mt.__sub = Set.sub
+
+--__mul
+function Set.mul(t1,t2)
+    local res = Set.new{}
+    for k in pairs(t1) do
+        res[k] = t2[k]
+    end
+    return res
+end
+
+mt.__mul = Set.mul
+
+--div
+function Set.div(t1,t2)
+    local res = Set.new()
+    for k in pairs(t1) do
+        if t1[k] ~=t2[k] and (not t2[k]) then
+            res[k] = t1[k]
+        end
+    end
+    return res
+end
+
+mt.__div = Set.div
+
+--__call
+function Set.call(t1,t2)
+    local res = Set.new{}
+    for i in pairs(t1) do
+        res[i] = true
+    end
+    for i in pairs(t2) do
+        res[i] = true
+    end
+    return res
+end
+
+mt.__call = Set.call
+
+s1 = Set.new{1,2,3,4}
+s2 = Set.new{5,6}
+
+Set.print(s1(s2))
+</code></pre>
+
+  
+  
+</div><!-- /.entry-content -->
+
+
+
+
+
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  
+
+
+
+<header>
+  <div class="entry-meta">
+    <span class="entry-date date published updated">
       <time datetime="2016-01-03T17:27:15+08:00">
         <a href="/blog/2016/01/03/fei-ling-huan-rao-gui-ze-yi-ji-qi-ou-gui-ze/">January 03, 2016</a>
       </time>
@@ -571,54 +810,6 @@
   
     <footer>
       <a class="btn" rel="full-article" href="/blog/2015/12/03/uibezierpathxue-xi-zong-jie/">继续阅读 &rarr;</a>
-    </footer>
-  
-</div><!-- /.entry-content -->
-
-
-
-
-
-</article><!-- /.hentry -->
-
-<article class="hentry">
-  
-
-
-
-<header>
-  <div class="entry-meta">
-    <span class="entry-date date published updated">
-      <time datetime="2015-12-02T16:29:31+08:00">
-        <a href="/blog/2015/12/02/ioslian-shi-kai-fa-%5B%3F%5D/">December 02, 2015</a>
-      </time>
-    </span>
-    <span class="author vcard">
-      <span class="fn">
-        <a href="" title="About Macro">Macro</a>
-      </span>
-    </span>
-    
-  </div><!-- /.entry-meta -->
-  
-    <h1 class="entry-title">
-      <a href="/blog/2015/12/02/ioslian-shi-kai-fa-%5B%3F%5D/" rel="bookmark" title="iOS链式开发(一)" itemprop="url">iOS链式开发(一)</a>
-    </h1>
-  
-</header>
-
-<div class="entry-content">
-  <blockquote><p>烦不烦？当你需要调用一组动画的时候，需要一个个函数组件的去调用，其实你可以运用你之前学过的block，来实现如一系列的连贯触发行为；</p></blockquote>
-
-<h3>什么是链式开发</h3>
-
-<p>简单的说就是通过“.”操作符调用一系列的操作；</p>
-
-
-  
-  
-    <footer>
-      <a class="btn" rel="full-article" href="/blog/2015/12/02/ioslian-shi-kai-fa-%5B%3F%5D/">继续阅读 &rarr;</a>
     </footer>
   
 </div><!-- /.entry-content -->
