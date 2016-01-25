@@ -10,6 +10,8 @@ categories: Lua
 
 元方法使用机制:首先检测一个操作中的值是否有元素,其次这些元素是否定义了关于次操作的方法.例如,两个表a+b,首先检查两个表是否有元素，之后检查是否有一个叫"__add"的字段，若找到则，则调用对应定义的值。其定义的值一般是一个函数就是“<b>元方法</b>”
 
+<!--more-->
+
 ###设置元表以及获取元表的方法 
 
 * setmetatable(table,metatable): 对指定table设置元表(metatable)，如果元表(metatable)中存在__metatable键值，setmetatable会失败 。
