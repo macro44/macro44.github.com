@@ -4,7 +4,7 @@
   <title><![CDATA[谁在弹一曲东风破]]></title>
   <link href="http://macro44.github.io/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2016-01-25T14:12:31+08:00</updated>
+  <updated>2016-01-25T14:15:44+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -56,6 +56,9 @@
     <updated>2016-01-18T10:45:23+08:00</updated>
     <id>http://macro44.github.io/blog/2016/01/18/luaxie-tong-cheng-xu-zhong-resumehe-yieldru-he-jiao-huan-shu-ju-yi-ji-[?]-ge-demode-li-jie</id>
     <content type="html"><![CDATA[<blockquote><p>协同在Lua中的作用和线程比较类似，协同有非常强大的功能，但用起来也很复杂，其中最难理解的一部分就是协同的交换数据部分</p></blockquote>
+
+<!--more-->
+
 
 <p>先来看一下协同的几个基本函数</p>
 
