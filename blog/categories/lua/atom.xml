@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Lua | 谁在弹一曲东风破]]></title>
   <link href="http://macro44.github.io/blog/categories/lua/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2016-01-25T14:15:44+08:00</updated>
+  <updated>2016-01-25T14:17:52+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -134,6 +134,9 @@ main    false   cannot resume dead coroutine  ---⑧
     <content type="html"><![CDATA[<blockquote><p>Lua table中我们可以通过访问key来获取value的值，但是却无法直接对两个table进行操作，此时我们通过元表修改操作符的行为，使其当面对一非预定义的操作时执行一个指定的操作.此行为可相较于c＋＋里面的运算符重载来看</p></blockquote>
 
 <p>元方法使用机制:首先检测一个操作中的值是否有元素,其次这些元素是否定义了关于次操作的方法.例如,两个表a+b,首先检查两个表是否有元素，之后检查是否有一个叫"__add"的字段，若找到则，则调用对应定义的值。其定义的值一般是一个函数就是“<b>元方法</b>”</p>
+
+<!--more-->
+
 
 <h3>设置元表以及获取元表的方法</h3>
 
