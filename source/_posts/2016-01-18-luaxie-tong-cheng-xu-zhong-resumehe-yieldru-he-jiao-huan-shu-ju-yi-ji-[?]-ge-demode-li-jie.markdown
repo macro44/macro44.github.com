@@ -99,5 +99,6 @@ coroutine.running()</td><td>
 ###参考文档
 [Lua5.3参考手册](http://cloudwu.github.io/lua53doc/manual.html#pdf-coroutine.resume)  
 [Lua协同程序-轩脉刃de刀光剑影-博客](http://www.cnblogs.com/yjf512/archive/2012/05/28/2521412.html)  
-[Lua协同程序-Runoob教程](http://www.runoob.com/lua/lua-coroutine.html)	
+[Lua协同程序-Runoob教程](http://www.runoob.com/lua/lua-coroutine.html)
+	
      
