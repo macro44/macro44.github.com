@@ -6,6 +6,8 @@ comments: true
 categories: 网络
 ---
 
+<!--more-->
+
 ###TCP连接
 
 建立TCP连接需要三次握手  
