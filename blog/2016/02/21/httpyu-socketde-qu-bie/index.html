@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+
+<head>
+
+
+<meta charset="utf-8">
+<meta http-equiv="cleartype" content="on">
+
+<title>Http与Socket的区别 - 谁在弹一曲东风破</title>
+<meta name="author" content="Macro">
+
+
+
+
+<meta name="description" content="我在你看不到的天空，看着灿烂的烟火">
+
+<meta name="keywords" content="网络 ">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Twitter Cards -->
+
+
+<!-- Open Graph -->
+<meta property="og:local" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:url" content="http://macro44.github.io/blog/2016/02/21/httpyu-socketde-qu-bie">
+<meta property="og:title" content="Http与Socket的区别">
+<meta property="og:description" content="我在你看不到的天空，看着灿烂的烟火">
+
+  <meta property="og:image" content="">
+
+<meta property="og:site_name" content="谁在弹一曲东风破">
+
+<link rel="canonical" href="http://macro44.github.io/blog/2016/02/21/httpyu-socketde-qu-bie">
+<link href="/favicon.png" rel="icon">
+<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="/atom.xml" rel="alternate" title="谁在弹一曲东风破" type="application/atom+xml">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+<script>Modernizr || document.write('<script src="/javascripts/vendor/modernizr-2.6.2.custom.min.js"><\/script>') </script>
+
+
+
+<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+
+</head>
+
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="/">首页</a></li>
+		<li>
+			<a href="#">关于我</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="/images/avatar.jpg" alt="Macro photo" class="author-photo">
+					<h4>Macro</h4>
+					<p>实践过的真知，不总结反思，等于浪费资源!</p>
+				</li>
+				<li><a href="true">Learn More</a></li>
+				<li>
+					<a href="mailto:macro_zj@163.com"><i class="fa fa-envelope"></i> Email</a>
+				</li>
+				
+				
+				<li>
+					<a href="https://github.com/macro44"><i class="fa fa-github"></i> GitHub</a>
+				</li>
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="/categories/">所有分类</a>
+<!-- 			<ul class="dl-submenu"> -->
+		<!-- 
+		<li><a href="/posts/"></a></li>
+				<li><a href="">所有分类</a></li>
+			</ul>
+ -->
+		</li>
+		
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="/blog/2016/02/21/httpyu-socketde-qu-bie/" rel="bookmark" title="Http与Socket的区别">Http与Socket的区别</a></h1>
+        
+        <h2>February 21, 2016</h2>
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <h3>TCP连接</h3>
+
+<p>建立TCP连接需要三次握手</p>
+
+<p>第一次握手：客户端发送SYN(syn=j)包到服务器，并且进入SYN_SEND状态，等待服务器确认;<br/>
+第二次握手：服务器收到SYN包，并确认客户的SYN(ack=j+1)，同时自己也发送一个SYN(syn=k)包，即SYN+ACK包，此时服务器进入SYN_RECV状态;<br/>
+第三次握手：客户端收到服务器发出的SYN_ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态；</p>
+
+<p>三次握手过程中都不包含数据，握手完毕，客户端和服务器之间开始进行数据交换，理想状态下，TCP连接一旦建立，在通信双方中的任何一方主动关闭连接之前，TCP连接会一直保持下去，也就是所谓的“长连接”；</p>
+
+<p><a href="http://blog.163.com/hlz_2599/blog/static/142378474201151943414397/">关于TCP协议的具体请参照博客</a></p>
+
+<h3>HTTP连接</h3>
+
+<p>HTTP，即超文本传输协议，也是我们在iOS9之前常用的一种数据传输协议，HTTP是基于TCP协议的的网络协议；</p>
+
+<p>HTTP的特点是客户端每次的连接请求都需要服务器回送响应，在请求结束后，会主动释放连接；</p>
+
+<p>现在被广泛使用的是HTTP1.1,在一次连接中可以处理多个请求，不必像http1.0一样一次连接只能处理一个请求，并且多个请求可以并发进行；</p>
+
+<p>因为HTTP每次连接之后服务器段都会主动释放连接，所以要保持客户端程序的数据最新状态，需要每隔一段时间就向服务器端发送请求，故此HTTP请求可以被认为是一种“短连接”；</p>
+
+<p><a href="http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html">关于HTTP协议的具体请参照博客</a></p>
+
+<h3>SOCKET连接</h3>
+
+<p>Socket是一种抽象层，应用程序通过它来发送和接收数据，使用Socket可以将应用程序添加到网络中，与处于同一网络中的其他应用程序进行通信。简单来说，Socket提供了程序内部与外界通信的端口并为通信双方的提供了数据传输通道；<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;它包含进行网络通信必须的五种信息：连接使用的协议，本地主机的IP地址，本地进程的协议端口，远地主机的IP地址，远地进程的协议端口。<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;Socket可以简单的理解成对TCP/UDP的封装，故Socket可以看成是一种“长连接”;</p>
+
+<h4>建立Soket之间的连接</h4>
+
+<p>首先至少需要一对套接字，其中一个运行于客户端,另一个运行于服务器.
+套接字之间的连接当选择不同的连接协议时有不同的步骤，TCP分为三个步骤：服务器监听、客户端请求、连接确认，而UDP则为：循环接收数据</p>
+
+<p>服务器监听：服务器端套接字并不定位具体的客户端套接字，而是处于等待连接的状态，实时监控网络状态，等待客户端的连接请求。</p>
+
+<p>客户端请求：指客户端的套接字提出连接请求，要连接的目标是服务器端的套接字。为此，客户端的套接字必须首先描述它要连接的服务器的套接字，指出服务器端套接字的地址和端口号，然后就向服务器端套接字提出连接请求。</p>
+
+<p>连接确认：当服务器端套接字监听到或者说接收到客户端套接字的连接请求时，就响应客户端套接字的请求，建立一个新的线程，把服务器端套接字的描述发给客户端，一旦客户端确认了此描述，双方就正式建立连接。而服务器端套接字继续处于监听状态，继续接收其他客户端套接字的连接请求。</p>
+
+<p><a href="http://www.cnblogs.com/dolphinX/p/3460545.html">关于Socket的理解可以参考</a><br/>
+<a href="http://blog.csdn.net/mad1989/article/details/9147661">关于Socket在手机端的具体请参考博客</a></p>
+
+<h3>HTTP与SOCKET之间的区别</h3>
+
+<p>由于通常情况下Socket连接就是TCP连接，因此Socket连接一旦建立，通信双方即可开始相互发送数据内容，直到双方连接断开。而HTTP连接使用的是“请求—响应”的方式，不仅在请求时需要先建立连接，而且需要客户端向服务器发出请求后，服务器端才能回复数据。</p>
+
+<p><a href="http://blog.csdn.net/zeng622peng/article/details/5546384">参考博客地址</a></p>
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="/categories/#网络" title="Pages tagged 网络" class="tag">网络</a></span>
+        <span><a href="/blog/2016/02/21/httpyu-socketde-qu-bie/" rel="bookmark" title="Http与Socket的区别">Http与Socket的区别</a> was published on <span class="entry-date date published updated"><time datetime="2016-02-21T18:56:16+08:00">February 21, 2016</time></span></span>
+        
+        <span class="author vcard"><span class="fn"><a href="" title="About Macro">Macro</a></span></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    
+      <div class="read-more">
+        
+          <div class="read-more-header">
+            <a href="/blog/2016/01/25/xue-xi-%5B%3F%5D-men-ji-suan-ji-yu-yan-de-bu-zou/" class="btn">Read More</a>
+          </div><!-- /.read-more-header -->
+          <div class="read-more-content">
+            <h3><a href="/blog/2016/01/25/xue-xi-%5B%3F%5D-men-ji-suan-ji-yu-yan-de-bu-zou/" title="学习一门计算机语言的步骤">学习一门计算机语言的步骤</a></h3>
+            <p>你是否也有这样的困惑？当你学习在开发遇到瓶颈，想要在原有基础上扩展你的知识面，想要学习一门新的语言的时候，总感觉不知该怎么下手，然后拿本语法书从头到尾的去看基础语法-高级语法。但是过段时间之后再回忆你学过的语言的知识时，又感觉什么都没看，因为没有任何逻辑可言， &hellip;&hellip; <a href="/blog/2016/01/25/xue-xi-%5B%3F%5D-men-ji-suan-ji-yu-yan-de-bu-zou/"> Continue reading</a></p>
+          </div><!-- /.read-more-content -->
+        
+        <div class="read-more-list">
+          
+            <div class="list-item">
+              <h4><a href="/blog/2016/01/18/luaxie-tong-cheng-xu-zhong-resumehe-yieldru-he-jiao-huan-shu-ju-yi-ji-%5B%3F%5D-ge-demode-li-jie/" title="Lua协同程序中resume和yield如何交换数据以及一个Demo的理解">Lua协同程序中resume和yield如何交换数据以及一个Demo的理解</a></h4>
+              <span>Published on January 18, 2016</span>
+            </div><!-- /.list-item -->
+          
+            <div class="list-item">
+              <h4><a href="/blog/2016/01/15/luayuan-biao-metatable-yi-ji-yuan-biao-zai-dui-xiang-zhong-de-ying-yong/" title="Lua元表(Metatable)以及元表在对象中的应用">Lua元表(Metatable)以及元表在对象中的应用</a></h4>
+              <span>Published on January 15, 2016</span>
+            </div><!-- /.list-item -->
+          
+        </div><!-- /.read-more-list -->
+      </div><!-- /.read-more -->
+    
+    
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2016 Macro. Powered by <a href="http://octopress.org">Octopress</a> using the <a href="https://github.com/jez/hpstr-theme/">HPSTR Theme for Octopress</a>.</span>
+
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+
+	        
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/javascripts/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/javascripts/octopress.js" type="text/javascript"></script>
+<script src="/javascripts/scripts.min.js"></script>
+
+
+
+
+
+
+	        
+
+</body>
+</html>

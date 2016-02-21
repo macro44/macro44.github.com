@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://macro44.github.io/blog/2016/02/21/httpyu-socketde-qu-bie/</loc>
+    <lastmod>2016-02-21T18:56:16+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://macro44.github.io/blog/2016/01/25/xue-xi-%5B%3F%5D-men-ji-suan-ji-yu-yan-de-bu-zou/</loc>
     <lastmod>2016-01-25T11:05:44+08:00</lastmod>
   </url>
@@ -95,5 +99,11 @@
   </url>
   <url>
     <loc>http://macro44.github.io/blog/categories/lua/</loc>
+  </url>
+  <url>
+    <loc>http://macro44.github.io/blog/categories/wang-luo/</loc>
+  </url>
+  <url>
+    <loc>http://macro44.github.io/posts/2/</loc>
   </url>
 </urlset>
