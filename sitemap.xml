@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://macro44.github.io/blog/2016/02/26/apple-payying-yong-nei-ji-cheng/</loc>
+    <lastmod>2016-02-26T19:52:41+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://macro44.github.io/blog/2016/02/25/ioswang-luo-kuang-jia-asiyu-afnde-bi-jiao/</loc>
     <lastmod>2016-02-25T23:08:15+08:00</lastmod>
   </url>
@@ -110,5 +114,11 @@
   </url>
   <url>
     <loc>http://macro44.github.io/blog/categories/wang-luo/</loc>
+  </url>
+  <url>
+    <loc>http://macro44.github.io/blog/categories/zhi-fu/</loc>
+  </url>
+  <url>
+    <loc>http://macro44.github.io/posts/2/</loc>
   </url>
 </urlset>
