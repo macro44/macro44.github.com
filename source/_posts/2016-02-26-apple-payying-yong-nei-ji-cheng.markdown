@@ -7,6 +7,8 @@ categories: 支付
 ---
 >Apple pay于2016年2月18日在国内上线，国内也已经有部分应用开始集成了。未来在电商类的项目中，又多了一个选择。本文主要讲述Apple pay的使用，下一篇将讲述Apple pay与主流的支付方式的区别。
 
+<!--more-->
+
 [转载并整理于博客园"大顺子"博客](http://www.cnblogs.com/dashunzi/p/ApplePay.html)  
 [转载并整理于CocoaChina-iOS开发](http://www.cocoachina.com/ios/20141023/10026.html)
 
