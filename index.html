@@ -124,6 +124,68 @@
 <header>
   <div class="entry-meta">
     <span class="entry-date date published updated">
+      <time datetime="2016-03-12T13:53:19+08:00">
+        <a href="/blog/2016/03/12/guan-yu-pi-liang-shang-chuan-yu-tong-bu-de-%5B%3F%5D-xie-si-kao/">March 12, 2016</a>
+      </time>
+    </span>
+    <span class="author vcard">
+      <span class="fn">
+        <a href="" title="About Macro">Macro</a>
+      </span>
+    </span>
+    
+  </div><!-- /.entry-meta -->
+  
+    <h1 class="entry-title">
+      <a href="/blog/2016/03/12/guan-yu-pi-liang-shang-chuan-yu-tong-bu-de-%5B%3F%5D-xie-si-kao/" rel="bookmark" title="关于批量上传与同步的一些思考" itemprop="url">关于批量上传与同步的一些思考</a>
+    </h1>
+  
+</header>
+
+<div class="entry-content">
+  <blockquote><p>在做一个项目的时候，遇到这么一个功能点，上传一件商品的多张图片，一般的实现步骤就是将所有的图片放到一个数组里面，然后通过AFNetworking进行单个循环上传，在界面上显示一个网络请求的图片，等所有图片都上传成功，再跳转至改显示的页面，这个在网速慢的情况下，非常影响用户体验，然后我看了一下朋友圈的整个流程，有了一套自己关于这整个流程的一套想法，现在分享出来，供大家探讨，其中可能有不妥的地方，望过客提出自己的宝贵意见</p></blockquote>
+
+<p><img src="http://7xopon.com1.z0.glb.clouddn.com/20160316.png" alt="上传的思考" />
+上面一部分描述的是整个流程，大致分为3步来实现；下面一部分是上传的具体流程，下面是具体的分析
+1、缓存所有的资源（图片或者视频），按照格式S1进行存储；</p>
+
+<pre><code>struct S1{
+    long Int dataFlag; // 资源唯一标志, 由三部分组成"具体的时间戳 + 资源在当前属于第几组 + 存储人唯一标志 + 资源编号"
+    Binary data; // 具体资源的二进制包
+    Bool   isUpdateWait;  //上传状态，1，等待上传的状态；2、上传失败
+}
+</code></pre>
+
+<p>2、在界面上显示为跳转到指定的显示页面，比如朋友圈，先显示本地数据，给用户一个数据已经上传的既视感。</p>
+
+<p>3、将数据背后上传处理，这里分为两步，第一步为发送网络数据请求S2，主要包含要上传的数据总的结构。</p>
+
+<pre><code>struct S2{
+    Int timestamp;  //时间戳
+    Int dataCount;  //资源的数量，如图片的张数，或者视频分为几个部分
+}
+</code></pre>
+
+<p>待服务器确认这一部分信息之后，开始上传数据主体，即开始从数据库进行数据上传。上传成功即删除本地文件，对于上传失败的文件进行，判断资源唯一标志，对具体的时间戳与组数进行比较，然后改变资源编号为“资源总数+1”的方式进行排队上传，具体如下部分流程图。</p>
+
+  
+  
+</div><!-- /.entry-content -->
+
+
+
+
+
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  
+
+
+
+<header>
+  <div class="entry-meta">
+    <span class="entry-date date published updated">
       <time datetime="2016-02-26T19:52:41+08:00">
         <a href="/blog/2016/02/26/apple-payying-yong-nei-ji-cheng/">February 26, 2016</a>
       </time>
@@ -509,63 +571,6 @@
   
     <footer>
       <a class="btn" rel="full-article" href="/blog/2015/12/21/sqlitexi-tong-hua-xue-xi-zhi-ji-chu-yu-fa/">继续阅读 &rarr;</a>
-    </footer>
-  
-</div><!-- /.entry-content -->
-
-
-
-
-
-</article><!-- /.hentry -->
-
-<article class="hentry">
-  
-
-
-
-<header>
-  <div class="entry-meta">
-    <span class="entry-date date published updated">
-      <time datetime="2015-12-16T10:31:14+08:00">
-        <a href="/blog/2015/12/16/htmlji-chu-biao-qian-zong-jie/">December 16, 2015</a>
-      </time>
-    </span>
-    <span class="author vcard">
-      <span class="fn">
-        <a href="" title="About Macro">Macro</a>
-      </span>
-    </span>
-    
-  </div><!-- /.entry-meta -->
-  
-    <h1 class="entry-title">
-      <a href="/blog/2015/12/16/htmlji-chu-biao-qian-zong-jie/" rel="bookmark" title="HTML基础标签总结" itemprop="url">HTML基础标签总结</a>
-    </h1>
-  
-</header>
-
-<div class="entry-content">
-  <blockquote><p>离不开H5，就尽情的享受HTML带来的方便。学H5，从基本的HTML开始；</p></blockquote>
-
-<h3>目录:</h3>
-
-<p><a href=#1>1. HTML基本文档</a><br/>
-<a href=#2>2. HTML基本标签</a><br/>
-<a href=#3>3. HTML文本格式化</a><br/>
-<a href=#4>4. 链接</a><br/>
-<a href=#5>5. 样式/区块</a><br/>
-<a href=#6>6. 表格</a><br/>
-<a href=#7>7. 列表</a><br/>
-<a href=#8>8. 框架</a><br/>
-<a href=#9>9. 表单</a><br/>
-<a href=#10>10. 实体</a><br/></p>
-
-
-  
-  
-    <footer>
-      <a class="btn" rel="full-article" href="/blog/2015/12/16/htmlji-chu-biao-qian-zong-jie/">继续阅读 &rarr;</a>
     </footer>
   
 </div><!-- /.entry-content -->

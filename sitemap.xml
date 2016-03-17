@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://macro44.github.io/blog/2016/03/12/guan-yu-pi-liang-shang-chuan-yu-tong-bu-de-%5B%3F%5D-xie-si-kao/</loc>
+    <lastmod>2016-03-12T13:53:19+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://macro44.github.io/blog/2016/02/26/apple-payying-yong-nei-ji-cheng/</loc>
     <lastmod>2016-02-26T19:52:41+08:00</lastmod>
   </url>
@@ -117,5 +121,8 @@
   </url>
   <url>
     <loc>http://macro44.github.io/blog/categories/zhi-fu/</loc>
+  </url>
+  <url>
+    <loc>http://macro44.github.io/posts/2/</loc>
   </url>
 </urlset>
