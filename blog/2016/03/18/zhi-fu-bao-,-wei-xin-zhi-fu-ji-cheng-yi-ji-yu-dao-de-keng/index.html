@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta http-equiv="cleartype" content="on">
 
-<title>关于批量上传与同步的一些思考 - 谁在弹一曲东风破</title>
+<title>支付宝、微信支付集成以及遇到的坑 - 谁在弹一曲东风破</title>
 <meta name="author" content="Macro">
 
 
@@ -32,15 +32,15 @@
 <!-- Open Graph -->
 <meta property="og:local" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:url" content="http://macro44.github.io/blog/2016/03/12/guan-yu-pi-liang-shang-chuan-yu-tong-bu-de-%5B%3F%5D-xie-si-kao">
-<meta property="og:title" content="关于批量上传与同步的一些思考">
+<meta property="og:url" content="http://macro44.github.io/blog/2016/03/18/zhi-fu-bao-,-wei-xin-zhi-fu-ji-cheng-yi-ji-yu-dao-de-keng">
+<meta property="og:title" content="支付宝、微信支付集成以及遇到的坑">
 <meta property="og:description" content="我在你看不到的天空，看着灿烂的烟火">
 
   <meta property="og:image" content="">
 
 <meta property="og:site_name" content="谁在弹一曲东风破">
 
-<link rel="canonical" href="http://macro44.github.io/blog/2016/03/12/guan-yu-pi-liang-shang-chuan-yu-tong-bu-de-%5B%3F%5D-xie-si-kao">
+<link rel="canonical" href="http://macro44.github.io/blog/2016/03/18/zhi-fu-bao-,-wei-xin-zhi-fu-ji-cheng-yi-ji-yu-dao-de-keng">
 <link href="/favicon.png" rel="icon">
 <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -106,43 +106,31 @@
     <header class="header-title">
       <div class="header-title-wrap">
         
-          <h1 class="entry-title"><a href="/blog/2016/03/12/guan-yu-pi-liang-shang-chuan-yu-tong-bu-de-%5B%3F%5D-xie-si-kao/" rel="bookmark" title="关于批量上传与同步的一些思考">关于批量上传与同步的一些思考</a></h1>
+          <h1 class="entry-title"><a href="/blog/2016/03/18/zhi-fu-bao-,-wei-xin-zhi-fu-ji-cheng-yi-ji-yu-dao-de-keng/" rel="bookmark" title="支付宝、微信支付集成以及遇到的坑">支付宝、微信支付集成以及遇到的坑</a></h1>
         
-        <h2>March 12, 2016</h2>
+        <h2>March 18, 2016</h2>
       </div><!-- /.header-title-wrap -->
     </header>
     <div class="entry-content">
-      <blockquote><p>在做一个项目的时候，遇到这么一个功能点，上传一件商品的多张图片，一般的实现步骤就是将所有的图片放到一个数组里面，然后通过AFNetworking进行单个循环上传，在界面上显示一个网络请求的图片，等所有图片都上传成功，再跳转至改显示的页面，这个在网速慢的情况下，非常影响用户体验，然后我看了一下朋友圈的整个流程，有了一套自己关于这整个流程的一套想法，现在分享出来，供大家探讨，其中可能有不妥的地方，望过客提出自己的宝贵意见</p></blockquote>
+      <p><a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.oyqOmT&amp;treeId=59&amp;articleId=103676&amp;docType=1">支付宝支付集成开发文档</a>
+<a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5">微信支付集成开发文档</a></p>
+
+<p>具体的集成过程就不详说了，看官方文档基本集成应该没有问题，具体说一下遇到了哪些坑。</p>
 
 <!--more-->
 
 
-<p><img src="http://7xopon.com1.z0.glb.clouddn.com/20160316.png" alt="上传的思考" />
-上面一部分描述的是整个流程，大致分为3步来实现；下面一部分是上传的具体流程，下面是具体的分析
-1、缓存所有的资源（图片或者视频），按照格式S1进行存储；</p>
+<p>坑1：支付宝集成的时候如果实在本地配置apiKey时需是转化为pkcs8格式，OC版本中间能使用换行符"\&ldquo;，但swift版本不允许,有两个办法，1、将apikey拷贝到oc版本的系统提供的demo中，然后运行打印，然后copy到swift版本进行粘贴；2、拷贝到文本编辑器中，然后选择去掉中间的空格，然后转化成无格式文本，再粘贴；</p>
 
-<pre><code>struct S1{
-    long Int dataFlag; // 资源唯一标志, 由三部分组成"具体的时间戳 + 资源在当前属于第几组 + 存储人唯一标志 + 资源编号"
-    Binary data; // 具体资源的二进制包
-    Bool   isUpdateWait;  //上传状态，1，等待上传的状态；2、上传失败
-}
-</code></pre>
+<p>坑2： 找不到头文件：#import &lt;openssl/xxx.h>,方法：在target  -> Build Settings -> Search Paths ->Header Search Paths里面，添加 $(PROJECT_DIR)/上层文件夹名/AliPay,至于其他的报常见类找不到，一般需要添加#import &lt;UIKit/UIKit.h>头文件</p>
 
-<p>2、在界面上显示为跳转到指定的显示页面，比如朋友圈，先显示本地数据，给用户一个数据已经上传的既视感。</p>
+<p>坑3：微信支付按照流程集成成功后，支付只有一个“确定”按钮，问题原因，参数出错，我的解决办法是参照网上的解决办法，让后台把签名中的sign全部改为大写。</p>
 
-<p>3、将数据背后上传处理，这里分为两步，第一步为发送网络数据请求S2，主要包含要上传的数据总的结构。</p>
-
-<pre><code>struct S2{
-    Int timestamp;  //时间戳
-    Int dataCount;  //资源的数量，如图片的张数，或者视频分为几个部分
-}
-</code></pre>
-
-<p>待服务器确认这一部分信息之后，开始上传数据主体，即开始从数据库进行数据上传。上传成功即删除本地文件，对于上传失败的文件进行，判断资源唯一标志，对具体的时间戳与组数进行比较，然后改变资源编号为“资源总数+1”的方式进行排队上传，具体如下部分流程图。</p>
+<p>坑4： 微信不能回调,这个问题一定要确保URL Schemes里面的appid与注册时候的appid一致；</p>
 
       <footer class="entry-meta">
         <span class="entry-tags"></span>
-        <span><a href="/blog/2016/03/12/guan-yu-pi-liang-shang-chuan-yu-tong-bu-de-%5B%3F%5D-xie-si-kao/" rel="bookmark" title="关于批量上传与同步的一些思考">关于批量上传与同步的一些思考</a> was published on <span class="entry-date date published updated"><time datetime="2016-03-12T13:53:19+08:00">March 12, 2016</time></span></span>
+        <span><a href="/blog/2016/03/18/zhi-fu-bao-,-wei-xin-zhi-fu-ji-cheng-yi-ji-yu-dao-de-keng/" rel="bookmark" title="支付宝、微信支付集成以及遇到的坑">支付宝、微信支付集成以及遇到的坑</a> was published on <span class="entry-date date published updated"><time datetime="2016-03-18T16:25:55+08:00">March 18, 2016</time></span></span>
         
         <span class="author vcard"><span class="fn"><a href="" title="About Macro">Macro</a></span></span>
         
@@ -152,11 +140,11 @@
       <div class="read-more">
         
           <div class="read-more-header">
-            <a href="/blog/2016/03/18/zhi-fu-bao-,-wei-xin-zhi-fu-ji-cheng-yi-ji-yu-dao-de-keng/" class="btn">Read More</a>
+            <a href="/blog/2016/03/12/guan-yu-pi-liang-shang-chuan-yu-tong-bu-de-%5B%3F%5D-xie-si-kao/" class="btn">Read More</a>
           </div><!-- /.read-more-header -->
           <div class="read-more-content">
-            <h3><a href="/blog/2016/03/18/zhi-fu-bao-,-wei-xin-zhi-fu-ji-cheng-yi-ji-yu-dao-de-keng/" title="支付宝、微信支付集成以及遇到的坑">支付宝、微信支付集成以及遇到的坑</a></h3>
-            <p>[支付宝支付集成开发文档](https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.oyqOmT&treeId=59&articleId=103676&docType=1)[微信支付集成开发文档]( &hellip;&hellip; <a href="/blog/2016/03/18/zhi-fu-bao-,-wei-xin-zhi-fu-ji-cheng-yi-ji-yu-dao-de-keng/"> Continue reading</a></p>
+            <h3><a href="/blog/2016/03/12/guan-yu-pi-liang-shang-chuan-yu-tong-bu-de-%5B%3F%5D-xie-si-kao/" title="关于批量上传与同步的一些思考">关于批量上传与同步的一些思考</a></h3>
+            <p>在做一个项目的时候，遇到这么一个功能点，上传一件商品的多张图片，一般的实现步骤就是将所有的图片放到一个数组里面，然后通过AFNetworking进行单个循环上传，在界面上显示一个网络请求的图片，等所有图片都上传成功，再跳转至改显示的页面，这个在网速慢的情况下，非常影响用户体验， &hellip;&hellip; <a href="/blog/2016/03/12/guan-yu-pi-liang-shang-chuan-yu-tong-bu-de-%5B%3F%5D-xie-si-kao/"> Continue reading</a></p>
           </div><!-- /.read-more-content -->
         
         <div class="read-more-list">

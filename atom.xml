@@ -4,7 +4,7 @@
   <title><![CDATA[谁在弹一曲东风破]]></title>
   <link href="http://macro44.github.io/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2016-03-17T17:31:46+08:00</updated>
+  <updated>2016-03-18T16:26:43+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -12,6 +12,29 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[支付宝、微信支付集成以及遇到的坑]]></title>
+    <link href="http://macro44.github.io/blog/2016/03/18/zhi-fu-bao-,-wei-xin-zhi-fu-ji-cheng-yi-ji-yu-dao-de-keng/"/>
+    <updated>2016-03-18T16:25:55+08:00</updated>
+    <id>http://macro44.github.io/blog/2016/03/18/zhi-fu-bao-,-wei-xin-zhi-fu-ji-cheng-yi-ji-yu-dao-de-keng</id>
+    <content type="html"><![CDATA[<p><a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.oyqOmT&amp;treeId=59&amp;articleId=103676&amp;docType=1">支付宝支付集成开发文档</a>
+<a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5">微信支付集成开发文档</a></p>
+
+<p>具体的集成过程就不详说了，看官方文档基本集成应该没有问题，具体说一下遇到了哪些坑。</p>
+
+<!--more-->
+
+
+<p>坑1：支付宝集成的时候如果实在本地配置apiKey时需是转化为pkcs8格式，OC版本中间能使用换行符"\&ldquo;，但swift版本不允许,有两个办法，1、将apikey拷贝到oc版本的系统提供的demo中，然后运行打印，然后copy到swift版本进行粘贴；2、拷贝到文本编辑器中，然后选择去掉中间的空格，然后转化成无格式文本，再粘贴；</p>
+
+<p>坑2： 找不到头文件：#import &lt;openssl/xxx.h>,方法：在target  -> Build Settings -> Search Paths ->Header Search Paths里面，添加 $(PROJECT_DIR)/上层文件夹名/AliPay,至于其他的报常见类找不到，一般需要添加#import &lt;UIKit/UIKit.h>头文件</p>
+
+<p>坑3：微信支付按照流程集成成功后，支付只有一个“确定”按钮，问题原因，参数出错，我的解决办法是参照网上的解决办法，让后台把签名中的sign全部改为大写。</p>
+
+<p>坑4： 微信不能回调,这个问题一定要确保URL Schemes里面的appid与注册时候的appid一致；</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[关于批量上传与同步的一些思考]]></title>
@@ -2960,94 +2983,6 @@ invoking.play.sing.eat(@"红烧牛肉面"); ②
 <li><p>Setting  <pre/>prefs:root=INTERNET_TETHERING</p></li>
 </ul>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Markdown语法学习]]></title>
-    <link href="http://macro44.github.io/blog/2015/12/02/markdownyu-fa-xue-xi/"/>
-    <updated>2015-12-02T14:05:11+08:00</updated>
-    <id>http://macro44.github.io/blog/2015/12/02/markdownyu-fa-xue-xi</id>
-    <content type="html"><![CDATA[<blockquote><p>基于一些巧合的原因接触了Octopress制作个人博客，在基本上搞定了所有基础框架的基础上，开始创建第一篇博客，但是发现，主体文章是基于Markdown的文档，之前基本上没有任何了解，搜集各种资料以及各个大神的博客，初步了解了一些基础语法，总结如下，希望能给以后的自己或你们提供力所能及的帮助;</p></blockquote>
-
-<!--more-->
-
-
-<h3>学习工具</h3>
-
-<p>推荐使用Mou,<a href="http://25.io/mou/">下载地址</a></p>
-
-<h3>学习历程:</h3>
-
-<ul>
-<li>了解最基本的语法</li>
-<li>尝试把所有的语法运用到一个简单的Demo中</li>
-</ul>
-
-
-<h3>基本语法</h3>
-
-<p>大致分为4个部分：文本、列表、样式、图片链接</p>
-
-<h4>文本</h4>
-
-<ul>
-<li>文字粗体 语法为: <strong>变粗的文本</strong></li>
-<li>文本斜体 语法为: <em>斜体部分</em></li>
-<li>下标     语法为: someText[^flag] [^flag]:des<br/>
-<strong>需要特别注意</strong> 下标语法中标记与解释不能放在一行中完成     <br/>
-<img src="http://7xopon.com1.z0.glb.clouddn.com/3.png" alt="图片效果" /></li>
-</ul>
-
-
-<h4>列表</h4>
-
-<ul>
-<li>有序列表  语法: 阿拉伯数字+.  如1.</li>
-<li>无序列表  语法: -或*+需要序列化的字符串,如基本语法样式</li>
-<li>列表＋代码  语法: 首先换行，删掉头部的自动添加的列表符号，然后连续两个Tab或者8个空格 <br/>
-<strong>需要特别注意</strong> 无论是有序还是无序，系统只会保持一种风格，且符号与文本之间必须隔着一个空格
- <img src="http://7xopon.com1.z0.glb.clouddn.com/5.png" alt="图片效果" /></li>
-</ul>
-
-
-<h4>样式</h4>
-
-<ul>
-<li>一级标题 语法为: #Markdown</li>
-<li>二级标题 语法为: ##Markdown</li>
-<li>三级标题 语法为: ###Markdown</li>
-<li>引导语   语法为:> + 空格 +文本 如> 你好</li>
-<li>段落分隔线 语法为: &mdash; 或者  ***</li>
-<li>简单文字代码框   语法为: <code>代码段</code></li>
-<li>段落代码框      语法为:Tab/4个空格+代码段（需要注意Tab前面不能存在含有意义的*,如果存在可用分割线来分隔)</li>
-<li><p>表格     语法为:</p>
-
-<pre><code>| 列名        | 列名          | 列名  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-</code></pre>
-
-<p><strong>需要特别注意</strong>本区块的代码必须要独立一行书写，且引导语标志必须➕空格
-<img src="http://7xopon.com1.z0.glb.clouddn.com/6.png" alt="图片效果" /></p></li>
-</ul>
-
-
-<h4>图片与链接</h4>
-
-<ul>
-<li>   链接    语法为: <a href="%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">链接名</a> 如<a href="www.baidu.com">百度</a></li>
-<li>   图片    语法为<img src="%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5" alt="图片名" />
-如<img src="http://7xopon.com1.z0.glb.clouddn.com/1.jpg" alt="Mou icon" /></li>
-</ul>
-
-
-<h3>Demo范文</h3>
-
-<p>本文Markdown源码：有兴趣的可以试着敲一遍!
-<img src="http://7xopon.com1.z0.glb.clouddn.com/7.png" alt="Demo范文" /></p>
 ]]></content>
   </entry>
   
