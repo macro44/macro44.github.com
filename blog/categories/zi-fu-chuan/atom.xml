@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 字符串 | 谁在弹一曲东风破]]></title>
+  <link href="http://macro44.github.io/blog/categories/zi-fu-chuan/atom.xml" rel="self"/>
+  <link href="http://macro44.github.io/"/>
+  <updated>2016-03-23T17:10:27+08:00</updated>
+  <id>http://macro44.github.io/</id>
+  <author>
+    <name><![CDATA[Macro]]></name>
+    <email><![CDATA[macro_zj@163.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[字符串过滤与限制和输入过滤与限制]]></title>
+    <link href="http://macro44.github.io/blog/2016/03/23/zi-fu-chuan-guo-lu-yu-xian-zhi-he-shu-ru-guo-lu-yu-xian-zhi/"/>
+    <updated>2016-03-23T15:51:06+08:00</updated>
+    <id>http://macro44.github.io/blog/2016/03/23/zi-fu-chuan-guo-lu-yu-xian-zhi-he-shu-ru-guo-lu-yu-xian-zhi</id>
+    <content type="html"><![CDATA[<blockquote><p>在输入的时候经常会遇到要限制输入字符串长度和特殊字符的情况，这里就总结一下</p></blockquote>
+
+<!--more-->
+
+
+<h2>字符串操作</h2>
+
+<p>以下所有字符串的操作都是基于一个NSString的拓展</p>
+
+<h3>限制字符串的长度</h3>
+
+<pre><code>testString.length 表示字符串的长度 
+</code></pre>
+
+<h3>过滤字符串首尾的空格与换行</h3>
+
+<pre><code>- (NSString*)stringExceptSpaceAndNewLineAtStartAndEnd{
+    NSCharacterSet *set = [NSCharacterSet whitespaceAndNewlineCharacterSet];
+    NSString *dealedString = [self stringByTrimmingCharactersInSet:set];
+    return dealedString;
+}
+</code></pre>
+
+<h3>过滤字符串中所有的空格与换行</h3>
+
+<pre><code>- (NSString*)stringExceptAllSpaceAndNewLine{
+    NSString* stringExcaptSpace = [self stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString* stringExcaptTable = [stringExcaptSpace stringByReplacingOccurrencesOfString:@"\r" withString:@""];
+    NSString* stringExcaptNewLine = [stringExcaptTable stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    return stringExcaptNewLine;
+}
+</code></pre>
+
+<h3>过滤字符串中首尾特殊的字符</h3>
+
+<pre><code>- (NSString*)stringExceptSpecialCharacterInString:(NSString*)characterString{
+    NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:characterString];
+    NSString *dealedString  =[self stringByTrimmingCharactersInSet:set];
+    return  dealedString;
+}
+</code></pre>
+
+<p><font color="red">注意:</font> 此方法只去除字符串首尾包含在characterString中的字符，且不能隔着其他的字符，例如,characterString 为"[]&ldquo;,而要过滤的字符串为&rdquo;[123]&ldquo;,则过滤后的字符串为"123]&rdquo;,后面的括号不能过滤</p>
+
+<h2>输入操作</h2>
+
+<p>以下的操作是基于UITextFieldDelegate中的<a href="https://developer.apple.com/library/ios/documentation/UIKit/Reference/UITextFieldDelegate_Protocol/">- (BOOL)textField:(UITextField <em>)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString </em>)string</a>函数</p>
+
+<h3>限制输入的长度</h3>
+
+<pre><code>- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (textField == self.textfield) {
+        if (textField.text.length-range.length + string.length &gt; 20) {
+            return NO;
+        }else{
+            return YES;
+        }
+    }
+    return YES;
+}
+</code></pre>
+
+<h3>过滤输入的特殊字符</h3>
+
+<pre><code>- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    if (textField == self.textfield) {
+        if (string.length &gt; 0) {
+            NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"[]"];
+            NSString* dealedString = [string stringByTrimmingCharactersInSet:set];
+            if (dealedString.length == 0) {
+                return NO;
+            }
+        }
+    }
+    return YES;
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

@@ -124,6 +124,52 @@
 <header>
   <div class="entry-meta">
     <span class="entry-date date published updated">
+      <time datetime="2016-01-15T17:25:23+08:00">
+        <a href="/blog/2016/01/15/luayuan-biao-metatable-yi-ji-yuan-biao-zai-dui-xiang-zhong-de-ying-yong/">January 15, 2016</a>
+      </time>
+    </span>
+    <span class="author vcard">
+      <span class="fn">
+        <a href="" title="About Macro">Macro</a>
+      </span>
+    </span>
+    
+  </div><!-- /.entry-meta -->
+  
+    <h1 class="entry-title">
+      <a href="/blog/2016/01/15/luayuan-biao-metatable-yi-ji-yuan-biao-zai-dui-xiang-zhong-de-ying-yong/" rel="bookmark" title="Lua元表(Metatable)以及元表在对象中的应用" itemprop="url">Lua元表(Metatable)以及元表在对象中的应用</a>
+    </h1>
+  
+</header>
+
+<div class="entry-content">
+  <blockquote><p>Lua table中我们可以通过访问key来获取value的值，但是却无法直接对两个table进行操作，此时我们通过元表修改操作符的行为，使其当面对一非预定义的操作时执行一个指定的操作.此行为可相较于c＋＋里面的运算符重载来看</p></blockquote>
+
+<p>元方法使用机制:首先检测一个操作中的值是否有元素,其次这些元素是否定义了关于次操作的方法.例如,两个表a+b,首先检查两个表是否有元素，之后检查是否有一个叫"__add"的字段，若找到则，则调用对应定义的值。其定义的值一般是一个函数就是“<b>元方法</b>”</p>
+
+
+  
+  
+    <footer>
+      <a class="btn" rel="full-article" href="/blog/2016/01/15/luayuan-biao-metatable-yi-ji-yuan-biao-zai-dui-xiang-zhong-de-ying-yong/">继续阅读 &rarr;</a>
+    </footer>
+  
+</div><!-- /.entry-content -->
+
+
+
+
+
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  
+
+
+
+<header>
+  <div class="entry-meta">
+    <span class="entry-date date published updated">
       <time datetime="2016-01-03T17:27:15+08:00">
         <a href="/blog/2016/01/03/fei-ling-huan-rao-gui-ze-yi-ji-qi-ou-gui-ze/">January 03, 2016</a>
       </time>
@@ -571,54 +617,6 @@
   
     <footer>
       <a class="btn" rel="full-article" href="/blog/2015/12/03/uibezierpathxue-xi-zong-jie/">继续阅读 &rarr;</a>
-    </footer>
-  
-</div><!-- /.entry-content -->
-
-
-
-
-
-</article><!-- /.hentry -->
-
-<article class="hentry">
-  
-
-
-
-<header>
-  <div class="entry-meta">
-    <span class="entry-date date published updated">
-      <time datetime="2015-12-02T16:29:31+08:00">
-        <a href="/blog/2015/12/02/ioslian-shi-kai-fa-%5B%3F%5D/">December 02, 2015</a>
-      </time>
-    </span>
-    <span class="author vcard">
-      <span class="fn">
-        <a href="" title="About Macro">Macro</a>
-      </span>
-    </span>
-    
-  </div><!-- /.entry-meta -->
-  
-    <h1 class="entry-title">
-      <a href="/blog/2015/12/02/ioslian-shi-kai-fa-%5B%3F%5D/" rel="bookmark" title="iOS链式开发(一)" itemprop="url">iOS链式开发(一)</a>
-    </h1>
-  
-</header>
-
-<div class="entry-content">
-  <blockquote><p>烦不烦？当你需要调用一组动画的时候，需要一个个函数组件的去调用，其实你可以运用你之前学过的block，来实现如一系列的连贯触发行为；</p></blockquote>
-
-<h3>什么是链式开发</h3>
-
-<p>简单的说就是通过“.”操作符调用一系列的操作；</p>
-
-
-  
-  
-    <footer>
-      <a class="btn" rel="full-article" href="/blog/2015/12/02/ioslian-shi-kai-fa-%5B%3F%5D/">继续阅读 &rarr;</a>
     </footer>
   
 </div><!-- /.entry-content -->
