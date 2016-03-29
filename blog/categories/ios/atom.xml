@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ios | 谁在弹一曲东风破]]></title>
   <link href="http://macro44.github.io/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://macro44.github.io/"/>
-  <updated>2016-03-23T17:10:27+08:00</updated>
+  <updated>2016-03-29T15:15:42+08:00</updated>
   <id>http://macro44.github.io/</id>
   <author>
     <name><![CDATA[Macro]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Url中出现引号怎么办]]></title>
+    <link href="http://macro44.github.io/blog/2016/03/29/urlzhong-chu-xian-yin-hao-zen-yao-ban/"/>
+    <updated>2016-03-29T14:55:31+08:00</updated>
+    <id>http://macro44.github.io/blog/2016/03/29/urlzhong-chu-xian-yin-hao-zen-yao-ban</id>
+    <content type="html"><![CDATA[<blockquote><p>经常遇到这样的问题在get/post请求的时候，传的头参数中包含有字符串，而直接使用字符串拼接的话会使字符串参数带有双引号，而由string转url的过程中不允许出现双引号，这个时候我们需要对字符串进行过滤。</p></blockquote>
+
+<!--more-->
+
+
+<pre><code>        NSString *urlString = @"http://xxxx/xx?out_trade_no=\"123\"";
+        urlString = [urlString stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+        NSURL *url = [NSURL URLWithString:urlString];
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[关联属性]]></title>
@@ -416,50 +433,6 @@ Strip Linked Product / Deployment Postprocessing / Symbols Hidden by Default 在
 <h3>列一个清单</h3>
 
 <p><img src="http://7xopon.com1.z0.glb.clouddn.com/2015121403.png" alt="效果展示" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[iOS App可执行文件瘦身(一)]]></title>
-    <link href="http://macro44.github.io/blog/2015/12/14/ios-appke-zhi-xing-wen-jian-shou-shen-%5B%3F%5D/"/>
-    <updated>2015-12-14T16:17:28+08:00</updated>
-    <id>http://macro44.github.io/blog/2015/12/14/ios-appke-zhi-xing-wen-jian-shou-shen-[?]</id>
-    <content type="html"><![CDATA[<div class="text" style="text-align:center;"><font size=6 color=red>iOS App可执行文件的组成</font></div>
-
-
-<blockquote><p>面试的时候遇到的面试题，如何给App瘦身，之前有看过类似的题目，讲的大概就是两个方面，一、给资源文件瘦身，2、能下载处理的尽量通过后续下载来处理。但没有实际操作过。所以总感觉回答的不是那么个味道。回来问同事以及查资料后果然，需要两个方面来瘦身：1、减少资源包的大小；2、减少可执行文件的大小。1在本博客后续博客中会提到如何瘦身，本文主要讲解可执行文件瘦身的一部分，App可执行文件的组成；</p></blockquote>
-
-<!--more-->
-
-
-<p><a href="http://blog.cnbang.net/tech/2296/">转载于bang&rsquo;s blog </a></p>
-
-<h3>查看App可执行文件组成的方法</h3>
-
-<ol>
-<li><p>XCode开启编译选项Write Link Map File
-Xcode -> Project -> Build Setting ->搜索map ->设置Write Link Map File为Yes<br/>
-<img src="http://7xopon.com1.z0.glb.clouddn.com/2015121401.png" alt="展示图片" /></p></li>
-<li><p>编译后，通过路径查找找到图中txt文件对应的文件
-具体路径: ~/Library/Developer/Xcode/DerivedData/XXX-xxxxxxxxxxxx/Build/Intermediates/XXX.build/Debug-iphoneos/XXX.build/XXX-LinkMap-xxx.txt<br/>
-（这个LinkMap展示了整个App中可执行文件的全貌，列出了编译后的每一个.o文件，包括.a文件里的，以及每一个目标文件的代码段，数据段存储详情等）</p></li>
-<li><p>以我目前手上的项目为例，在linkMap中的文件列表，有部分删减，为了方便讲解
-<img src="http://7xopon.com1.z0.glb.clouddn.com/2015121402.png" alt="展示图片" /></p>
-
-<p>  第一部分(Object files部分)含义：<br/>
-  前面中括号表示文件的编号，在后面的部分中会用到,后面表示可执行文件的位置</p>
-
-<p>  第二部分(Sections部分)含义:<br/>
-  Address表示偏移位置,Size表示大小,Segment表示段类型(<code>__TEXT</code>,保存程序代码段编译后的机器码，<code>__Data</code>),Section表示段名称(<code>__text</code>表示编译后的程序可执行语句，<code>__data</code>表示已初始化的全局变量和局部静态变量，<code>__bss</code>表示未初始化的全局变量和局部静态变量,<code>__csstring</code>表示代码里的字符串常量)</p>
-
-<p>  可以发现每一行的数据都是紧跟在上一行数据后面， 即第二行到Address为第一行的Address加上第二行的Size组成</p>
-
-<p>  第三部分(symbols部分)含义:
-  Address 表示偏移位置,第二部分表示占用大小,第三部分表示所属文件序号，对应上述Object files列表，最后是文件名称</p></li>
-<li><p>使用<br/>
- 在了解了可执行文件的组成后，我们可以通过计算来获取某个静态库在项目中的占比，通过将.a静态库的.o加起来，就是这个静态库可执行部分占整个app空间的大小。（但是需要注意，此大小并不等于静态库的物理大小，此大小只是可执行文件的大小，要小于静态库的物理大小）</p></li>
-</ol>
-
 ]]></content>
   </entry>
   

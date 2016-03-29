@@ -10,7 +10,7 @@
 <meta charset="utf-8">
 <meta http-equiv="cleartype" content="on">
 
-<title>支付宝、微信支付集成以及遇到的坑 - 谁在弹一曲东风破</title>
+<title>Url中出现引号怎么办 - 谁在弹一曲东风破</title>
 <meta name="author" content="Macro">
 
 
@@ -18,7 +18,7 @@
 
 <meta name="description" content="我在你看不到的天空，看着灿烂的烟火">
 
-<meta name="keywords" content=" ">
+<meta name="keywords" content="ios ">
 
 
 <!-- http://t.co/dKP3o1e -->
@@ -32,15 +32,15 @@
 <!-- Open Graph -->
 <meta property="og:local" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:url" content="http://macro44.github.io/blog/2016/03/18/zhi-fu-bao-,-wei-xin-zhi-fu-ji-cheng-yi-ji-yu-dao-de-keng">
-<meta property="og:title" content="支付宝、微信支付集成以及遇到的坑">
+<meta property="og:url" content="http://macro44.github.io/blog/2016/03/29/urlzhong-chu-xian-yin-hao-zen-yao-ban">
+<meta property="og:title" content="url中出现引号怎么办">
 <meta property="og:description" content="我在你看不到的天空，看着灿烂的烟火">
 
   <meta property="og:image" content="">
 
 <meta property="og:site_name" content="谁在弹一曲东风破">
 
-<link rel="canonical" href="http://macro44.github.io/blog/2016/03/18/zhi-fu-bao-,-wei-xin-zhi-fu-ji-cheng-yi-ji-yu-dao-de-keng">
+<link rel="canonical" href="http://macro44.github.io/blog/2016/03/29/urlzhong-chu-xian-yin-hao-zen-yao-ban">
 <link href="/favicon.png" rel="icon">
 <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -106,31 +106,25 @@
     <header class="header-title">
       <div class="header-title-wrap">
         
-          <h1 class="entry-title"><a href="/blog/2016/03/18/zhi-fu-bao-,-wei-xin-zhi-fu-ji-cheng-yi-ji-yu-dao-de-keng/" rel="bookmark" title="支付宝、微信支付集成以及遇到的坑">支付宝、微信支付集成以及遇到的坑</a></h1>
+          <h1 class="entry-title"><a href="/blog/2016/03/29/urlzhong-chu-xian-yin-hao-zen-yao-ban/" rel="bookmark" title="url中出现引号怎么办">url中出现引号怎么办</a></h1>
         
-        <h2>March 18, 2016</h2>
+        <h2>March 29, 2016</h2>
       </div><!-- /.header-title-wrap -->
     </header>
     <div class="entry-content">
-      <p><a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.oyqOmT&amp;treeId=59&amp;articleId=103676&amp;docType=1">支付宝支付集成开发文档</a>
-<a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5">微信支付集成开发文档</a></p>
-
-<p>具体的集成过程就不详说了，看官方文档基本集成应该没有问题，具体说一下遇到了哪些坑。</p>
+      <blockquote><p>经常遇到这样的问题在get/post请求的时候，传的头参数中包含有字符串，而直接使用字符串拼接的话会使字符串参数带有双引号，而由string转url的过程中不允许出现双引号，这个时候我们需要对字符串进行过滤。</p></blockquote>
 
 <!--more-->
 
 
-<p>坑1：支付宝集成的时候如果实在本地配置apiKey时需是转化为pkcs8格式，OC版本中间能使用换行符"\&ldquo;，但swift版本不允许,有两个办法，1、将apikey拷贝到oc版本的系统提供的demo中，然后运行打印，然后copy到swift版本进行粘贴；2、拷贝到文本编辑器中，然后选择去掉中间的空格，然后转化成无格式文本，再粘贴；</p>
-
-<p>坑2： 找不到头文件：#import &lt;openssl/xxx.h>,方法：在target  -> Build Settings -> Search Paths ->Header Search Paths里面，添加 $(PROJECT_DIR)/上层文件夹名/AliPay,至于其他的报常见类找不到，一般需要添加#import &lt;UIKit/UIKit.h>头文件</p>
-
-<p>坑3：微信支付按照流程集成成功后，支付只有一个“确定”按钮，问题原因，参数出错，我的解决办法是参照网上的解决办法，让后台把签名中的sign全部改为大写。</p>
-
-<p>坑4： 微信不能回调,这个问题一定要确保URL Schemes里面的appid与注册时候的appid一致；</p>
+<pre><code>        NSString *urlString = @"http://xxxx/xx?out_trade_no=\"123\"";
+        urlString = [urlString stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+        NSURL *url = [NSURL URLWithString:urlString];
+</code></pre>
 
       <footer class="entry-meta">
-        <span class="entry-tags"></span>
-        <span><a href="/blog/2016/03/18/zhi-fu-bao-,-wei-xin-zhi-fu-ji-cheng-yi-ji-yu-dao-de-keng/" rel="bookmark" title="支付宝、微信支付集成以及遇到的坑">支付宝、微信支付集成以及遇到的坑</a> was published on <span class="entry-date date published updated"><time datetime="2016-03-18T16:25:55+08:00">March 18, 2016</time></span></span>
+        <span class="entry-tags"><a href="/categories/#ios" title="Pages tagged ios" class="tag">ios</a></span>
+        <span><a href="/blog/2016/03/29/urlzhong-chu-xian-yin-hao-zen-yao-ban/" rel="bookmark" title="url中出现引号怎么办">url中出现引号怎么办</a> was published on <span class="entry-date date published updated"><time datetime="2016-03-29T14:55:31+08:00">March 29, 2016</time></span></span>
         
         <span class="author vcard"><span class="fn"><a href="" title="About Macro">Macro</a></span></span>
         
@@ -140,22 +134,22 @@
       <div class="read-more">
         
           <div class="read-more-header">
-            <a href="/blog/2016/03/29/urlzhong-chu-xian-yin-hao-zen-yao-ban/" class="btn">Read More</a>
+            <a href="/blog/2016/03/23/zi-fu-chuan-guo-lu-yu-xian-zhi-he-shu-ru-guo-lu-yu-xian-zhi/" class="btn">Read More</a>
           </div><!-- /.read-more-header -->
           <div class="read-more-content">
-            <h3><a href="/blog/2016/03/29/urlzhong-chu-xian-yin-hao-zen-yao-ban/" title="url中出现引号怎么办">url中出现引号怎么办</a></h3>
-            <p>> 经常遇到这样的问题在get/post请求的时候，传的头参数中包含有字符串，而直接使用字符串拼接的话会使字符串参数带有双引号，而由string转url的过程中不允许出现双引号，这个时候我们需要对字符串进行过滤。		    NSString *urlString = @" &hellip;&hellip; <a href="/blog/2016/03/29/urlzhong-chu-xian-yin-hao-zen-yao-ban/"> Continue reading</a></p>
+            <h3><a href="/blog/2016/03/23/zi-fu-chuan-guo-lu-yu-xian-zhi-he-shu-ru-guo-lu-yu-xian-zhi/" title="字符串过滤与限制和输入过滤与限制">字符串过滤与限制和输入过滤与限制</a></h3>
+            <p>在输入的时候经常会遇到要限制输入字符串长度和特殊字符的情况，这里就总结一下字符串操作以下所有字符串的操作都是基于一个NSString的拓展限制字符串的长度testString.length 表示字符串的长度 过滤字符串首尾的空格与换行- (NSString*) &hellip;&hellip; <a href="/blog/2016/03/23/zi-fu-chuan-guo-lu-yu-xian-zhi-he-shu-ru-guo-lu-yu-xian-zhi/"> Continue reading</a></p>
           </div><!-- /.read-more-content -->
         
         <div class="read-more-list">
           
             <div class="list-item">
-              <h4><a href="/blog/2016/03/23/zi-fu-chuan-guo-lu-yu-xian-zhi-he-shu-ru-guo-lu-yu-xian-zhi/" title="字符串过滤与限制和输入过滤与限制">字符串过滤与限制和输入过滤与限制</a></h4>
-              <span>Published on March 23, 2016</span>
+              <h4><a href="/blog/2016/03/18/guan-lian-shu-xing/" title="关联属性">关联属性</a></h4>
+              <span>Published on March 18, 2016</span>
             </div><!-- /.list-item -->
           
             <div class="list-item">
-              <h4><a href="/blog/2016/03/18/guan-lian-shu-xing/" title="关联属性">关联属性</a></h4>
+              <h4><a href="/blog/2016/03/18/zhi-fu-bao-,-wei-xin-zhi-fu-ji-cheng-yi-ji-yu-dao-de-keng/" title="支付宝、微信支付集成以及遇到的坑">支付宝、微信支付集成以及遇到的坑</a></h4>
               <span>Published on March 18, 2016</span>
             </div><!-- /.list-item -->
           
